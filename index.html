@@ -208,6 +208,100 @@ select{font:500 1rem var(--body);padding:8px;border-radius:8px;border:1px solid 
 .meter{height:10px;border-radius:5px;background:var(--line);overflow:hidden}
 .meter i{display:block;height:100%;background:var(--accent)}
 .miss{display:flex;flex-direction:column;gap:8px;border-top:1px solid var(--line);padding-top:14px}
+/* streaks, badges, notes, chart, speed round, formula sheet */
+.streak{display:inline-flex;align-items:center;gap:4px;font:700 .85rem var(--body);color:var(--c2)}
+.badges{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}
+.badge{border:1px solid var(--line);border-radius:10px;padding:10px;display:flex;gap:10px;align-items:center;background:var(--surface)}
+.badge i{font-style:normal;font-size:1.6rem;line-height:1}.badge b{display:block;font-size:.9rem}.badge span{font-size:.8rem;color:var(--muted)}
+.badge.off{opacity:.45}.badge.off i{filter:grayscale(1)}
+.notes{display:flex;flex-direction:column;gap:10px}
+.note-card{background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:8px;padding:12px 14px}
+.note-card p{max-width:none}.note-card small{color:var(--muted);font-size:.8rem}
+.letter{font-size:1.05rem;line-height:1.6;max-width:32ch;margin:0 auto}
+.chart{display:block;width:100%;max-width:420px;height:auto}
+.chart .gl{stroke:var(--line);stroke-width:1}.chart .goal{stroke:var(--c3);stroke-width:2;stroke-dasharray:6 4}
+.chart .ln{fill:none;stroke:var(--accent);stroke-width:3;stroke-linejoin:round}.chart .pt{fill:var(--accent);stroke:var(--surface);stroke-width:2}
+.chart text{fill:var(--muted);font:500 11px var(--math)}.chart .gt{fill:var(--c3);font-weight:600}.chart .vt{fill:var(--ink);font-weight:600}
+.timer{font:700 2.4rem/1 var(--display);text-align:center}.timer.low{color:var(--bad)}
+.spq{font:600 1.6rem var(--math);text-align:center;min-height:2.2em;display:flex;align-items:center;justify-content:center}
+@keyframes shake{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+@media (prefers-reduced-motion:no-preference){.shake{animation:shake .25s}}
+.sheet{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
+.sheet section{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 14px;display:flex;flex-direction:column;gap:6px;break-inside:avoid}
+.sheet h3{font-size:1rem;color:var(--accent)}.sheet p,.sheet li{font-size:.92rem}.sheet ul{gap:3px}
+.sync{display:flex;flex-direction:column;gap:8px}
+.sync input{font:500 .9rem var(--math);padding:8px;border-radius:8px;border:1px solid var(--line);background:var(--bg);color:var(--ink);width:100%}
+@media print{.top,.nextrow,.pager,.btn,button,.hero,noscript{display:none!important}body{background:#fff;color:#000}.topic{display:none!important}#t-sheet{display:flex!important}.sheet section{border-color:#999}}
+/* ---------- polish: softer surfaces, smooth motion, mobile tab bar ---------- */
+html,body{overflow-x:clip}body{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+.top{background:color-mix(in srgb,var(--bg) 80%,transparent);-webkit-backdrop-filter:saturate(1.5) blur(12px);backdrop-filter:saturate(1.5) blur(12px)}
+.hero{background-color:var(--bg);background-image:radial-gradient(circle at 92% 0%,color-mix(in srgb,var(--accent) 22%,transparent),transparent 55%),radial-gradient(circle at 0% 100%,color-mix(in srgb,var(--hi) 22%,transparent),transparent 50%),linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:auto,auto,24px 24px,24px 24px}
+.hero h1{background:linear-gradient(100deg,var(--ink) 30%,var(--accent));-webkit-background-clip:text;background-clip:text;color:transparent}
+.btn,.card,.choice,.key,.seg button,.badge,.linkbtn,.mus,.me,input,select{transition:transform .18s cubic-bezier(.2,.8,.2,1),box-shadow .2s ease,background-color .2s ease,border-color .2s ease,color .2s ease,opacity .2s}
+.btn{border-radius:12px;padding:11px 18px}
+.btn:not(.ghost){box-shadow:0 8px 18px -10px color-mix(in srgb,var(--accent) 80%,transparent)}
+.btn.ghost{background:color-mix(in srgb,var(--accent) 6%,transparent)}
+.btn:hover:not(:disabled){transform:translateY(-1px)}
+.btn:active:not(:disabled),.choice:active:not(:disabled),.card:active,.key:active{transform:translateY(1px) scale(.98)}
+.card{border-radius:16px;box-shadow:0 1px 2px rgba(30,15,70,.06)}
+.card:hover{transform:translateY(-2px);border-color:color-mix(in srgb,var(--accent) 55%,var(--line));box-shadow:0 14px 28px -18px rgba(70,35,160,.55)}
+.choice{border-radius:12px;border-color:var(--line);background:var(--surface)}
+.choice:hover:not(:disabled):not(.right):not(.wrong){border-color:var(--accent);transform:translateY(-1px)}
+.pr{border:1.5px solid var(--line);border-radius:18px;box-shadow:0 18px 40px -28px rgba(50,25,120,.55);padding:18px}
+.today{border-radius:18px;border-width:1.5px;box-shadow:0 18px 40px -30px rgba(50,25,120,.6);background:linear-gradient(160deg,color-mix(in srgb,var(--accent) 7%,var(--surface)),var(--surface) 60%)}
+.widget,.ex{border-radius:16px;box-shadow:0 1px 2px rgba(30,15,70,.05)}
+.warn,.tip,.fb{border-radius:12px}
+.meter,.bar{border-radius:999px}.meter i{border-radius:999px;background:linear-gradient(90deg,var(--accent),var(--c4))}
+.pr-in input:focus,.sync input:focus,select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 4px color-mix(in srgb,var(--accent) 22%,transparent)}
+.seg{border-color:var(--line);border-radius:12px;background:var(--surface)}
+.seg button[aria-pressed="true"]{background:var(--accent);color:var(--on-accent)}
+.lvlup{-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}
+.lvcard{border-radius:22px;box-shadow:0 30px 60px -20px rgba(0,0,0,.5)}
+@media (prefers-reduced-motion:no-preference){
+  .in{animation:stepin .38s cubic-bezier(.2,.8,.2,1) both}
+  .choice.right{animation:pop .35s ease-out}
+  .lvlup{animation:fadein .2s ease-out}
+}
+@keyframes fadein{from{opacity:0}to{opacity:1}}
+/* bottom tab bar on phones */
+.tabbar{display:none}
+@media (max-width:720px){
+  .tabbar{display:grid;grid-template-columns:repeat(5,1fr);position:fixed;left:0;right:0;bottom:0;z-index:6;padding:6px 6px calc(6px + env(safe-area-inset-bottom,0px));background:color-mix(in srgb,var(--surface) 86%,transparent);-webkit-backdrop-filter:saturate(1.5) blur(14px);backdrop-filter:saturate(1.5) blur(14px);border-top:1px solid var(--line)}
+  .tabbar a{display:flex;flex-direction:column;align-items:center;gap:1px;padding:5px 0;border-radius:12px;text-decoration:none;color:var(--muted);font:600 .7rem var(--body);position:relative}
+  .tabbar a span{font-size:1.25rem;line-height:1.2;transition:transform .2s cubic-bezier(.2,.8,.2,1)}
+  .tabbar a.on{color:var(--accent);background:color-mix(in srgb,var(--accent) 10%,transparent)}
+  .tabbar a.on span{transform:translateY(-1px) scale(1.12)}
+  .tabbar a b{position:absolute;top:2px;right:calc(50% - 22px);min-width:17px;height:17px;border-radius:9px;background:var(--bad);color:#fff;font:700 .65rem/17px var(--body);text-align:center;padding:0 4px}
+  .wrap{padding-bottom:96px}
+  .xptoast{right:12px}
+}
+/* ---------- flair: sunset hero with rolling waves, lesson icons, emoji bursts, score dial ---------- */
+.hero{margin-inline:calc(50% - 50vw)!important;padding-inline:max(16px,calc(50vw - 374px))!important;position:relative;overflow:hidden;isolation:isolate;border-bottom:0;padding-block:30px 118px;color:#fff;
+  background:linear-gradient(180deg,#1d1147 0%,#4b2aa8 30%,#9d4edd 52%,#ff7a59 76%,#ffc861 100%)!important;background-size:auto!important}
+.hero::before{content:"";position:absolute;inset:0;z-index:-1;background-image:radial-gradient(1.5px 1.5px at 12% 18%,#fff 50%,transparent 51%),radial-gradient(1px 1px at 32% 8%,#fff 50%,transparent 51%),radial-gradient(1.5px 1.5px at 58% 22%,#fff 50%,transparent 51%),radial-gradient(1px 1px at 78% 12%,#fff 50%,transparent 51%),radial-gradient(1px 1px at 90% 30%,#fff 50%,transparent 51%),radial-gradient(1px 1px at 45% 34%,#fff 50%,transparent 51%);opacity:.7}
+.hero h1{color:#fff;background:none;-webkit-background-clip:border-box;background-clip:border-box;text-shadow:0 2px 18px rgba(40,10,80,.45);font-size:clamp(2.1rem,7vw,3.1rem)}
+.hero p{color:rgba(255,255,255,.92);text-shadow:0 1px 8px rgba(40,10,80,.35)}
+.greet{font:600 .95rem var(--body)!important;color:#ffe7b0!important;letter-spacing:.02em;margin:0 0 6px!important}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.chips span{font:600 .82rem var(--body);background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.3);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);padding:5px 11px;border-radius:999px;color:#fff}
+.sun{position:absolute;z-index:-1;right:9%;bottom:44px;width:120px;height:120px;border-radius:50%;background:radial-gradient(circle at 50% 45%,#fff7d1,#ffd36b 55%,#ff9a5a);box-shadow:0 0 70px 26px rgba(255,190,100,.42)}
+.waves{position:absolute;left:0;right:0;bottom:-1px;height:92px;z-index:-1;overflow:hidden}
+.waves svg{position:absolute;bottom:0;left:0;width:200%}
+.waves .w1{fill:#2bb5a8;opacity:.55;height:92px}.waves .w2{fill:#1b7fa6;opacity:.75;height:68px}.waves .w3{fill:var(--bg);height:40px}
+@media (prefers-reduced-motion:no-preference){
+  .waves .w1{animation:roll 16s linear infinite}.waves .w2{animation:roll 11s linear infinite reverse}.waves .w3{animation:roll 8s linear infinite}
+  .sun{animation:sunbob 7s ease-in-out infinite}}
+@keyframes roll{to{transform:translateX(-50%)}}
+@keyframes sunbob{50%{transform:translateY(6px)}}
+.card{position:relative;overflow:hidden}
+.card[data-ic]::after{content:attr(data-ic);position:absolute;top:10px;right:12px;font-size:1.45rem;transition:transform .25s cubic-bezier(.2,.8,.2,1)}
+.card:hover::after{transform:rotate(-10deg) scale(1.15)}
+.card.s3{background:linear-gradient(160deg,color-mix(in srgb,var(--good) 10%,var(--surface)),var(--surface) 70%)}
+.group>h3{display:flex;align-items:center;gap:8px;font-size:1.25rem}
+.pop-emoji{position:fixed;z-index:9;pointer-events:none;font-size:1.7rem;animation:floatup 1.1s cubic-bezier(.2,.8,.2,1) both}
+@keyframes floatup{0%{opacity:0;transform:translate(0,0) scale(.4)}20%{opacity:1;transform:translate(calc(var(--dx)*.3),-20px) scale(1.1)}100%{opacity:0;transform:translate(var(--dx),-110px) scale(.9) rotate(var(--r))}}
+.dial{display:block;width:100%;max-width:320px;margin:4px auto 0}
+.dial .lbl{fill:var(--muted);font:600 11px var(--math)}.dial .big{fill:var(--ink);font:700 46px var(--display)}
 .confetti{position:fixed;inset:0;pointer-events:none;z-index:9;overflow:hidden}
 .confetti i{position:absolute;top:-14px;width:8px;height:14px;border-radius:2px;animation:fall 2.1s ease-in forwards}
 
@@ -233,9 +327,12 @@ select{font:500 1rem var(--body);padding:8px;border-radius:8px;border:1px solid 
 <div class="wrap">
 
 <section class="topic" id="t-home">
-  <div class="hero">
+  <div class="hero"><div class="sun" aria-hidden="true"></div>
+    <div class="waves" aria-hidden="true"><svg class="w1" viewBox="0 0 2880 90" preserveAspectRatio="none"><path d="M0 45 Q180 12 360 45 T720 45 Q900 12 1080 45 T1440 45 Q1620 12 1800 45 T2160 45 Q2340 12 2520 45 T2880 45 V90 H0Z"/></svg><svg class="w2" viewBox="0 0 2880 90" preserveAspectRatio="none"><path d="M0 45 Q180 12 360 45 T720 45 Q900 12 1080 45 T1440 45 Q1620 12 1800 45 T2160 45 Q2340 12 2520 45 T2880 45 V90 H0Z"/></svg><svg class="w3" viewBox="0 0 2880 90" preserveAspectRatio="none"><path d="M0 45 Q180 12 360 45 T720 45 Q900 12 1080 45 T1440 45 Q1620 12 1800 45 T2160 45 Q2340 12 2520 45 T2880 45 V90 H0Z"/></svg></div>
+    <p class="greet" id="greet"></p>
     <h1>Bailey’s PERT Study Guide</h1>
     <p>All the math on the PERT, in short lessons you tap through one idea at a time. A practice test that adapts like the real one shows how ready you are, and a daily study goal keeps you on track for test day.</p>
+    <div class="chips" id="chips"></div>
   </div>
   <noscript><p class="warn"><b>The practice, animations and sliders need a web browser.</b> Open this file in Safari or Chrome (right-click the file, Open With). You can still read every lesson by scrolling down.</p></noscript>
   <div class="today" id="home-today"></div>
@@ -273,7 +370,7 @@ select{font:500 1rem var(--body);padding:8px;border-radius:8px;border:1px solid 
       <li><b>Mastered:</b> you got it right again on two later days. Remembering after time away is what counts on test day.</li>
     </ul>
   </div>
-  <div class="row l"><a class="btn ghost" href="#t-test" data-k="test">Practice tests</a><a class="btn ghost" href="#t-day" data-k="day">Test day guide</a></div>
+  <div class="row l" id="home-tools"><a class="btn ghost" href="#t-test" data-k="test">Practice tests</a><a class="btn ghost" href="#t-nb" data-k="nb">Mistake notebook</a><a class="btn ghost" href="#t-speed" data-k="speed">Speed round</a><a class="btn ghost" href="#t-sheet" data-k="sheet">Formula sheet</a><a class="btn ghost" href="#t-day" data-k="day">Test day guide</a></div>
 </section>
 
 <section class="topic" id="t-today">
@@ -607,6 +704,41 @@ select{font:500 1rem var(--body);padding:8px;border-radius:8px;border:1px solid 
 </section>
 
 
+<section class="topic" id="t-nb">
+  <div class="block"><span class="kicker">Your redo pile</span><h2>Mistake notebook</h2>
+  <p class="lead">Every problem you miss lands here. You get a fresh version of the same kind of problem, and it leaves the notebook once you get it right on two different days. Clearing it is one of the fastest ways to raise a score.</p></div>
+  <div id="nb-area" class="part"></div>
+</section>
+
+<section class="topic" id="t-speed">
+  <div class="block"><span class="kicker">60 seconds</span><h2>Speed round</h2>
+  <p class="lead">Quick mental math against the clock: times tables, negatives, fractions, percents and powers. The faster these come, the more brain you have left for the hard questions.</p></div>
+  <div id="sp-area"></div>
+</section>
+
+<section class="topic" id="t-sheet">
+  <div class="block"><span class="kicker">One page</span><h2>Formula sheet</h2>
+  <p class="lead">Every rule the PERT math test leans on, in one place. Read it the night before, or print it and stick it on the fridge.</p>
+  <div class="row l"><button class="btn ghost" onclick="window.print()">Print this page</button></div></div>
+  <div class="sheet">
+    <section><h3>Order of operations</h3><p>Parentheses, Exponents, then Multiply and Divide left to right, then Add and Subtract left to right.</p><p class="m">24 ÷ 4 × 2 = 12</p></section>
+    <section><h3>Negatives</h3><ul><li>Minus a negative is plus: <span class="m">5 − (−3) = 8</span></li><li>Same signs multiply to positive, different signs to negative</li><li><span class="m">(−2)² = 4</span> but <span class="m">−2² = −4</span></li></ul></section>
+    <section><h3>Fractions</h3><ul><li>Add or subtract: match the bottoms first</li><li>Multiply: straight across</li><li>Divide: flip the second, then multiply</li><li>Mixed number: <span class="m">2 1/3 = 7/3</span></li></ul></section>
+    <section><h3>Percents</h3><ul><li>part = percent × whole</li><li>Percent change = change ÷ original</li><li>25% off means you pay 75%</li><li><span class="m">1/4 = 0.25 = 25%</span>, <span class="m">1/8 = 12.5%</span></li></ul></section>
+    <section><h3>Ratios and proportions</h3><ul><li>Cross-multiply: <span class="m">a/b = c/d</span> means <span class="m">ad = bc</span></li><li>Unit rate: divide to get the amount for one</li><li>Smaller unit, multiply. Bigger unit, divide.</li></ul></section>
+    <section><h3>Solving equations</h3><ol><li>Distribute</li><li>Combine like terms</li><li>x terms on one side, numbers on the other</li><li>Divide by the number on x</li></ol><p>Flip an inequality sign when you multiply or divide by a negative.</p></section>
+    <section><h3>Lines</h3><ul><li><span class="m">y = mx + b</span>: m is the slope, b is where it crosses the y-axis</li><li>Slope = change in y ÷ change in x</li><li>Parallel: same slope. Perpendicular: flip it and change the sign</li><li>x-intercept: set y = 0</li></ul></section>
+    <section><h3>Systems</h3><ul><li>Substitution: plug one equation into the other</li><li>Elimination: add the equations so a letter cancels</li><li>Same slope, different b: no solution</li></ul></section>
+    <section><h3>Exponents</h3><ul><li>Multiply: add exponents. Divide: subtract</li><li>Power of a power: multiply</li><li><span class="m">x⁰ = 1</span> and <span class="m">x⁻² = 1/x²</span></li><li><span class="m">√50 = √25 · √2 = 5√2</span></li></ul></section>
+    <section><h3>Polynomials and factoring</h3><ul><li>FOIL: First, Outer, Inner, Last</li><li><span class="m">(x + a)² = x² + 2ax + a²</span></li><li><span class="m">x² − a² = (x + a)(x − a)</span></li><li>Trinomial: two numbers that multiply to the last and add to the middle</li><li>Always pull out a common factor first</li></ul></section>
+    <section><h3>Quadratics</h3><ul><li>Get 0 on one side, factor, set each part to 0</li><li>x = <span class="fr"><span>−b ± <span class="rt">√<span class="rad">b² − 4ac</span></span></span><span>2a</span></span></li><li><span class="m">b² − 4ac</span> positive: two answers, zero: one, negative: none</li><li>Vertex at <span class="m">x = −b ÷ 2a</span></li></ul></section>
+    <section><h3>Radicals and fractions with x</h3><ul><li>Square both sides, then check every answer</li><li>Cancel whole factors only, never single terms</li><li>The bottom of a fraction can never be 0</li><li>No square roots of negatives</li></ul></section>
+    <section><h3>Functions</h3><ul><li><span class="m">f(3)</span>: put 3 in for every x</li><li><span class="m">f(g(x))</span>: work inside out</li><li>Inverse: run it backwards</li></ul></section>
+    <section><h3>Geometry</h3><ul><li>Rectangle: <span class="m">A = lw</span>, <span class="m">P = 2l + 2w</span></li><li>Triangle: <span class="m">A = ½bh</span>, angles add to 180°</li><li>Circle: <span class="m">A = πr²</span>, <span class="m">C = 2πr</span></li><li>Right triangle: <span class="m">a² + b² = c²</span></li></ul></section>
+    <section><h3>Words into math</h3><ul><li>of, times, per: multiply</li><li>less than: subtract, and it flips the order. "5 less than x" is <span class="m">x − 5</span></li><li>is, equals: =</li><li>sum, total: add</li></ul></section>
+  </div>
+</section>
+
 <section class="topic" id="t-day">
   <div class="block"><span class="kicker">Before you go</span><h2>Test day guide</h2>
   <p class="lead">Knowing exactly how the PERT works removes most of the surprises. Here is what to expect and how to use it to your advantage.</p></div>
@@ -646,6 +778,7 @@ select{font:500 1rem var(--body);padding:8px;border-radius:8px;border:1px solid 
     <p class="tip"><b>A plan for getting stuck.</b> Decide now: "If I am stuck for a few minutes, I will try the answer choices, pick the best one, and move on." Having the plan ready means you do not have to make that decision under pressure.</p></div>
 </section>
 <div class="nextrow" id="nextrow"></div>
+<nav class="tabbar" id="tabbar" aria-label="Main"><a href="#t-home" data-k="home"><span>🏠</span>Home</a><a href="#t-today" data-k="today"><span>▶️</span>Today</a><a href="#t-test" data-k="test"><span>📝</span>Tests</a><a href="#t-nb" data-k="nb"><span>📓</span>Notebook</a><a href="#t-me" data-k="me"><span>🐢</span>Me</a></nav>
 </div>
 
 <script>
@@ -1015,14 +1148,14 @@ try{const m=/[#&]import=([^&]*)/.exec(location.hash);if(m){let have=null;try{hav
 try{Object.assign(st,JSON.parse(localStorage.getItem(LS))||{})}catch(e){}
 if(st.v!==2){st.v=2;delete st.tests;st.hist={};st.best={};st.pert=st.pert||[];st.target=st.target||114;st.lvlSeen=Math.min(st.lvlSeen||1,9);if(!st.test||st.test<inDays(0))st.test=inDays(28)}
 if(!st.test)st.test=inDays(28);
-const save=()=>{try{localStorage.setItem(LS,JSON.stringify(st))}catch(e){}};
+const save=()=>{st.saved=Date.now();try{localStorage.setItem(LS,JSON.stringify(st))}catch(e){}if(typeof cloudSoon==='function')cloudSoon()};
 const esc=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 const anim=(el,cls)=>{el.classList.remove(cls);void el.offsetWidth;el.classList.add(cls)};
 const iso=d=>d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'),today=()=>iso(new Date());
 const dd=(a,b)=>Math.round((Date.parse(b)-Date.parse(a))/864e5);
 const cards=[...document.querySelectorAll('.card[data-k]')].filter(c=>G[c.dataset.k]),KEYS=cards.map(c=>c.dataset.k),NAME={},NUM={},GRP={};
 cards.forEach((c,i)=>{const k=c.dataset.k;NAME[k]=c.querySelector('b').textContent;NUM[k]=i+1;GRP[k]=c.dataset.g;c.insertAdjacentHTML('beforeend','<span class="lvls"><i></i><i></i><i></i></span>')});
-const ORDER=['home','today',...KEYS,'test','day','me'],PAGE={home:'Home',today:"Today's session",test:'Practice tests',day:'Test day guide',me:'Your profile'};let current='home';
+const ORDER=['home','today',...KEYS,'test','nb','speed','sheet','day','me'],PAGE={home:'Home',today:"Today's session",test:'Practice tests',nb:'Mistake notebook',speed:'Speed round',sheet:'Formula sheet',day:'Test day guide',me:'Your profile'};let current='home';
 const sk=k=>st.sk[k]||(st.sk[k]={n:0,rv:0,lvl:2});
 const status=k=>{const s=st.sk[k];return!s||!s.n?0:s.n<GOAL?1:s.rv<2?2:3},SNAME=['New','Learning','Proficient','Mastered'];
 const isDue=k=>{const s=st.sk[k];return!!(s&&s.n>0&&s.last&&dd(s.last,today())>=[1,3,7][Math.min(s.rv,2)])};
@@ -1046,24 +1179,24 @@ function work(ol){ol.classList.add('work');let prev=null;[...ol.children].forEac
   const h=toks.map((t,i)=>mk[i]?`<span class="chg">${esc(t)}</span>`:esc(t)),e=toks.indexOf('=');
   li.innerHTML=`<span class="wn">${note}</span>`+(e>0&&e<toks.length-1?`<span class="wl mm">${h.slice(0,e).join(' ')}</span><span class="we">=</span><span class="wr mm">${h.slice(e+1).join(' ')}</span>`:`<span class="wf mm">${h.join(' ')}</span>`);prev=toks})}
 
-function confetti(cnt){if(calm)return;const c=document.createElement('div');c.className='confetti';for(let i=0;i<(cnt||40);i++){const s=document.createElement('i');s.style.cssText=`left:${R(3,97)}%;background:var(${pick(['--accent','--hi','--c2','--c3','--c4'])});animation-delay:${R(0,35)/100}s;--dx:${R(-90,90)}px;--r:${R(180,720)}deg`;c.appendChild(s)}document.body.appendChild(c);setTimeout(()=>c.remove(),2800)}
+function confetti(cnt){if(calm)return;const c=document.createElement('div');c.className='confetti';for(let i=0;i<(cnt||40);i++){const s=document.createElement('i');s.style.cssText=`left:${R(3,97)}%;background:var(${pick(['--accent','--hi','--c2','--c3','--c4'])});animation-delay:${R(0,35)/100}s;--dx:${R(-90,90)}px;--r:${R(180,720)}deg`;if(i%4===0){s.textContent=pick(['🌺','🐠','🐢','🌊','⭐','🐬']);s.style.background='none';s.style.width='auto';s.style.height='auto';s.style.fontSize='22px'}c.appendChild(s)}document.body.appendChild(c);setTimeout(()=>c.remove(),2800)}
 
 /* ---------- home, navigation ---------- */
-function daysHTML(){const t=new Date(),out=[];let n=0;for(let i=6;i>=0;i--){const d=new Date(t.getFullYear(),t.getMonth(),t.getDate()-i),on=st.days.includes(iso(d));if(on)n++;out.push(`<i class="${on?'on':''}">${'SMTWTFS'[d.getDay()]}</i>`)}return`<div class="days">${out.join('')}<span>${n} of the last 7 days</span></div>`}
+function daysHTML(){const t=new Date(),out=[];let n=0;for(let i=6;i>=0;i--){const d=new Date(t.getFullYear(),t.getMonth(),t.getDate()-i),on=st.days.includes(iso(d));if(on)n++;out.push(`<i class="${on?'on':''}">${'SMTWTFS'[d.getDay()]}</i>`)}const sk2=typeof streak==='function'?streak():0;return`<div class="days">${out.join('')}<span>${n} of the last 7 days</span>${sk2>1?`<span class="streak">🔥 ${sk2}-day streak</span>`:''}</div>`}
 function paint(){
   let done=0;cards.forEach(c=>{const k=c.dataset.k,s=status(k);if(s>=2)done++;c.className='card s'+s;c.querySelector('em').textContent=`Lesson ${NUM[k]} · ${SNAME[s]}${isDue(k)?' · review due':''}`;c.querySelectorAll('.lvls i').forEach((x,i)=>x.classList.toggle('on',i<s))});
   
-  const j=$('jump');j.hidden=false;j.innerHTML=`<option value="home">Home</option><option value="today">Today's session</option>`+KEYS.map(k=>`<option value="${k}">${NUM[k]}. ${NAME[k]}${status(k)>=2?' ✓':''}</option>`).join('')+`<option value="test">Practice tests</option><option value="day">Test day guide</option><option value="me">Your level and plan</option>`;j.value=current;
+  const j=$('jump');j.hidden=false;j.innerHTML=`<option value="home">Home</option><option value="today">Today's session</option>`+KEYS.map(k=>`<option value="${k}">${NUM[k]}. ${NAME[k]}${status(k)>=2?' ✓':''}</option>`).join('')+`<option value="test">Practice tests</option><option value="nb">Mistake notebook${st.nb&&st.nb.length?' ('+st.nb.length+')':''}</option><option value="speed">Speed round</option><option value="sheet">Formula sheet</option><option value="day">Test day guide</option><option value="me">Your level and plan</option>`;j.value=current;
   const sd=started(),due=sd.filter(isDue).length,nx=upNext(),H=$('home-today');
   if(!sd.length)H.innerHTML=`<h3>Start here</h3><p>Not sure where to begin? The starting check asks a couple of quick questions per lesson and sets each lesson to the right level for you. It is not graded, and guessing is fine.</p><div class="row l"><a class="btn" href="#t-test" data-k="test">Find where to start</a><a class="btn ghost" href="#t-${KEYS[0]}" data-k="${KEYS[0]}">Or begin at Lesson 1</a></div>`;
-  else H.innerHTML=`<h3>Today</h3>${daysHTML()}<p>${due?`<b>${due} ${due===1?'lesson is':'lessons are'} due for a quick review.</b> Reviewing after a day or two away is what makes it stick.`:'Nothing is overdue. A short mixed session keeps everything fresh.'}</p><div class="row l"><a class="btn" href="#t-today" data-k="today">Start today's 10 minutes</a>${nx?`<a class="btn ghost" href="#t-${nx}" data-k="${nx}">Up next: Lesson ${NUM[nx]}, ${NAME[nx]}</a>`:''}</div>`;
-  H.insertAdjacentHTML('afterbegin',goalHTML());paintMe();
+  else H.innerHTML=`<h3>Today</h3>${daysHTML()}<p>${due?`<b>${due} ${due===1?'lesson is':'lessons are'} due for a quick review.</b> Reviewing after a day or two away is what makes it stick.`:'Nothing is overdue. A short mixed session keeps everything fresh.'}</p><div class="row l"><a class="btn" href="#t-today" data-k="today">Start today's 10 minutes</a>${st.nb&&st.nb.length?`<a class="btn ghost" href="#t-nb" data-k="nb">Mistake notebook (${st.nb.length})</a>`:''}${nx?`<a class="btn ghost" href="#t-${nx}" data-k="${nx}">Up next: Lesson ${NUM[nx]}, ${NAME[nx]}</a>`:''}</div>`;
+  H.insertAdjacentHTML('afterbegin',goalHTML());paintMe();paintHero();const tn=document.querySelector('#tabbar [data-k=nb]');if(tn){const n=(st.nb||[]).length;tn.innerHTML=`<span>📓</span>Notebook${n?`<b>${n}</b>`:''}`}const tm=document.querySelector('#tabbar [data-k=me] span');if(tm)tm.textContent=LEVELS[level()-1][1];
 }
 function show(k,scroll){
-  if(!ORDER.includes(k))k='home';current=k;
+  if(!ORDER.includes(k))k='home';current=k;document.querySelectorAll('#tabbar a').forEach(a=>a.classList.toggle('on',a.dataset.k===k));
   document.querySelectorAll('.topic').forEach(s=>{s.hidden=s.id!=='t-'+k});paint();
   const sec=$('t-'+k),pe=sec.querySelector('[data-practice]');if(pe&&pe._fresh&&pe._lv!==sk(k).lvl)pe._fresh();
-  if(k==='today'&&!sess)todayIntro();if(k==='me')profile();
+  if(k==='today'&&!sess)todayIntro();if(k==='me')profile();if(k==='nb'&&!nbRun)nbIntro();if(k==='speed'&&!spRun)spIntro();if(k==='test'&&!run)menu();
   const i=ORDER.indexOf(k),p=ORDER[i-1],n=ORDER[i+1],nm=x=>PAGE[x]||NAME[x];
   $('nextrow').innerHTML=k==='home'?'':(p?`<a class="btn ghost" href="#t-${p}" data-k="${p}">← ${nm(p)}</a>`:'<span></span>')+(n?`<a class="btn ghost" href="#t-${n}" data-k="${n}">${nm(n)} →</a>`:'');
   try{history.replaceState(null,'','#'+k)}catch(e){}
@@ -1095,7 +1228,7 @@ document.querySelectorAll('.topic').forEach(sec=>{[...sec.querySelectorAll('.ex'
 /* ---------- practice engine ---------- */
 const LV=['','Warm-up','Test level','Challenge'];
 function record(it,res){const s=sk(it.key),t=today();let msg='',bonus=0;s.last=t;
-  if(res.ok){if(!st.days.includes(t))st.days=[...st.days,t].slice(-60);
+  if(res.ok){markDay();
     if(it.lv>=2&&res.hints<=1&&res.tries<=1){const was=s.n;s.n++;if(was<GOAL&&s.n>=GOAL){s.p5=t;bonus=50;msg=` Lesson ${NUM[it.key]} is now <b>Proficient</b>. Get it right again on two later days and it becomes Mastered.`;confetti()}
       else if(s.p5&&t>s.p5&&s.rvd!==t&&res.hints===0&&!res.tries&&s.rv<2){s.rv++;s.rvd=t;if(s.rv===2){bonus=100;msg=` <b>${NAME[it.key]} is Mastered.</b> You still had it after days away, and that is what counts.`;confetti()}else msg=` That counts as a later-day review of ${NAME[it.key]}: 1 of 2 toward Mastered.`}}}
   if(res.ok){st.solved=(st.solved||0)+1;const x=(res.tries>1?2:([0,5,10,15][it.lv]||10)+(!res.hints&&res.first?5:0)+(it.review?5:0))+bonus;msg=` <span class="xpb">+${x} XP</span>`+msg;save();paint();addXP(x);return msg}
@@ -1114,12 +1247,12 @@ function mount(el,cfg){let it,shown,solved,tries,streak=0,miss=0,count=0,note=''
     note='';pretty(el)}
   function hints(k){const old=shown;shown=Math.max(shown,Math.min(k,it.p.steps.length));const h=q('.hints');h.hidden=!shown;h.innerHTML=it.p.steps.slice(0,shown).map(s=>`<li>${s}</li>`).join('');work(h);pretty(h);[...h.children].forEach((l,i)=>{if(i>=old)[...l.children].forEach(c=>anim(c,'in'))});if(shown>=it.p.steps.length)q('[data-a=hint]').hidden=true}
   function fb(ok,msg){const f=q('.fb');f.hidden=false;f.className='fb '+(ok?'ok':'no');f.innerHTML=msg}
-  function missed(msg){if(!tries){miss++;streak=0}tries++;const more=shown<it.p.steps.length-1;fb(false,msg+(more?' Here is the next step:':' Try once more, or tap "Show a hint" to see the answer.'));if(more)hints(shown+1)}
-  function win(){if(solved)return;solved=true;const res={ok:true,hints:shown,first:!tries,tries},own=shown<it.p.steps.length;let msg=record(it,res);
+  function missed(msg){if(!tries){miss++;streak=0;if(cfg.nb&&it.nbx){it.nbx.ok=[];save()}else if(it.key)nbAdd(it.key,it.lv,it.gi)}tries++;const more=shown<it.p.steps.length-1;fb(false,msg+(more?' Here is the next step:':' Try once more, or tap "Show a hint" to see the answer.'));if(more)hints(shown+1)}
+  function win(){if(solved)return;solved=true;const res={ok:true,hints:shown,first:!tries,tries},own=shown<it.p.steps.length;let msg=record(it,res);if(cfg.nb&&it.nbx)msg+=nbHit(it.nbx,res.first&&!shown);
     if(res.first&&!shown){streak++;miss=0}else streak=0;
     if(cfg.key){const s=sk(cfg.key);if(streak>=3&&s.lvl<3){s.lvl++;streak=0;save();msg+=` Three in a row with no help, so the next ones are at <b>${LV[s.lvl]}</b>.`}}
     fb(true,(own?'Correct.':'That is it. Try a new one with fewer hints.')+(it.review?` That one came from Lesson ${NUM[it.key]}, ${NAME[it.key]}.`:'')+(cfg.key&&it.lv<2&&own?' Warm-ups do not count toward Proficient, so try Test level when you feel ready.':'')+msg+(own?' Here is the full working:':''));hints(it.p.steps.length);
-    const b=q('[data-a=new]');b.className='btn';b.textContent=cfg.last&&cfg.last(count)?'Finish':'Next problem';el.querySelectorAll('.choice,.pr-in input,[data-a=check],.key').forEach(x=>x.disabled=true);q('.pr-score').textContent=cfg.score(count)}
+    burst(q('.fb'),own&&!tries?7:4);const b=q('[data-a=new]');b.className='btn';b.textContent=cfg.last&&cfg.last(count)?'Finish':'Next problem';el.querySelectorAll('.choice,.pr-in input,[data-a=check],.key').forEach(x=>x.disabled=true);q('.pr-score').textContent=cfg.score(count)}
   function check(){const v=parseNum(q('.pr-in input').value),a=it.p.ans;
     if(isNaN(v))return fb(false,'Type a number, like 7, −3 or 3/4.');if(same(v,a))return win();
     missed(a&&same(-v,a)?'Right number, wrong sign. Look for the step with a negative.':v&&a&&same(1/v,a)?'You have it upside down. Check which number goes on top.':a&&(same(v*100,a)||same(v/100,a))?'Check percent against decimal: the dot moves two places.':a&&(same(v*10,a)||same(v/10,a))?'Close. Check where the decimal point goes.':'Not yet.')}
@@ -1136,8 +1269,8 @@ document.querySelectorAll('[data-practice]').forEach(el=>{const key=el.dataset.p
   mount(el,{key,id:key,title:'Practice',
     score:()=>{const s=st.sk[key]||{n:0,rv:0},x=status(key);return x===3?'Mastered ✓':x===2?`Proficient · later-day reviews ${s.rv} of 2`:`${s.n} of ${GOAL} right at Test level or higher`},
     next:({streak,count})=>{const s=sk(key),earlier=started().filter(k=>k!==key);if(streak>=3)mixed=true;
-      if(mixed&&s.lvl>=2&&earlier.length&&count%3===2){const k=pick(earlier);return{key:k,lv:2,p:gen(k,2)[1](),review:true,tag:'Mixed in from an earlier lesson. Which method does it need?'}}
-      const f=gen(key,s.lvl,last);last=f;return{key,lv:s.lvl,p:f[1]()}}})});
+      if(mixed&&s.lvl>=2&&earlier.length&&count%3===2){const k=pick(earlier);const g2=gen(k,2);return{key:k,lv:2,p:g2[1](),gi:G[k].indexOf(g2),review:true,tag:'Mixed in from an earlier lesson. Which method does it need?'}}
+      const f=gen(key,s.lvl,last);last=f;return{key,lv:s.lvl,p:f[1](),gi:G[key].indexOf(f)}}})});
 
 /* ---------- today's session: a short mixed review with a clear end ---------- */
 let sess=null;const TA=$('today-area');
@@ -1148,7 +1281,7 @@ function todayIntro(){sess=null;const sd=started(),due=sd.filter(isDue).length;
   const b=$('go-today');if(b)b.onclick=startToday}
 function startToday(){const q=queue(8);sess={n:0};TA.innerHTML='<div id="today-pr"></div>';
   mount($('today-pr'),{id:'today',title:"Today's session",score:c=>`Problem ${c} of 8`,last:c=>c>=8,
-    next:({count})=>{if(count>=8)return null;const k=q[count],lv=Math.max(2,sk(k).lvl>2?pick([2,3]):2);return{key:k,lv,p:gen(k,lv)[1](),review:true}},
+    next:({count})=>{if(count>=8)return null;const k=q[count],lv=Math.max(2,sk(k).lvl>2?pick([2,3]):2);const g3=gen(k,lv);return{key:k,lv,p:g3[1](),gi:G[k].indexOf(g3),review:true}},
     done:()=>{confetti();const nx=upNext();TA.innerHTML=`<div class="today in"><h3>Done for today</h3>${daysHTML()}<p>That is the session. Stopping here is a good choice: coming back tomorrow does more than doing extra now.</p><div class="row l">${nx?`<a class="btn" href="#t-${nx}" data-k="${nx}">Or carry on with Lesson ${NUM[nx]}, ${NAME[nx]}</a>`:''}<button class="btn ghost" id="go-today">8 more</button><a class="btn ghost" href="#t-home" data-k="home">Home</a></div></div>`;$('go-today').onclick=startToday;sess=1}})}
 
 /* ---------- starting check and practice tests ---------- */
@@ -1165,12 +1298,12 @@ function est(qs){let w=GRID.map(t=>Math.exp(-t*t/3.92));qs.forEach(x=>{if(x.pick
 const toScore=t=>Math.max(50,Math.min(150,Math.round(100+16*t)));
 const BANDS=[[123,'College Algebra range','123 or higher is the usual Florida score for College Algebra (MAC 1105).'],[114,'College-ready','114 to 122 is college-ready in Florida and usually places into Intermediate Algebra (MAT 1033).'],[96,'Just below college-ready','96 to 113 is under the college-ready score of 114. Many colleges place this into a developmental math course.'],[50,'Building the basics','Below 96. Work through the number skills and the first algebra lessons, then test again.']];
 const band=s=>BANDS.find(b=>s>=b[0]);
-function pertItem(k,lv){let g=G[k].filter(x=>x[0]===lv&&x[2]!=='err');if(!g.length)g=G[k].filter(x=>x[2]!=='err');return toMC(pick(g)[1]())}
+function pertItem(k,lv){let g=G[k].filter(x=>x[0]===lv&&x[2]!=='err');if(!g.length)g=G[k].filter(x=>x[2]!=='err');const f=pick(g);return[toMC(f[1]()),G[k].indexOf(f)]}
 function nextPert(){const used={},qs=run.qs;qs.forEach(x=>used[x.k]=(used[x.k]||0)+1);const th=qs.length?est(qs).m:-.6,last=qs.length?qs[qs.length-1].k:null;let best=null,bs=1e9;
   Object.keys(DIFF).forEach(k=>DIFF[k].forEach((b,i)=>{if(k===last)return;const s=Math.abs(b-th)+.45*(used[k]||0)+Math.random()*.35;if(s<bs){bs=s;best={k,lv:i+1,b}}}));
-  best.p=pertItem(best.k,best.lv);best.pick=null;qs.push(best)}
+  [best.p,best.gi]=pertItem(best.k,best.lv);best.pick=null;qs.push(best)}
 function menu(){run=null;const h=st.pert||[],ids=Object.keys(TESTS),last=h[h.length-1];
-  T.innerHTML=`<div class="group"><h3>PERT practice test</h3><p>${PN} questions that adapt to you the way the real PERT does: get one right and the next is harder. At the end you get an estimated PERT score on the real 50 to 150 scale.</p><div class="cards"><button class="card" data-pt="1"><em>${h.length?'Your scores: '+h.slice(-6).map(x=>x.s).join(' → '):'Not taken yet'}</em><b>Take a PERT practice test</b><span>${last?'Latest '+last.s+' · your goal is '+st.target:PN+' questions, no time limit, new questions every time'}</span></button></div></div>
+  T.innerHTML=`<div class="group"><h3>PERT practice test</h3><p>${PN} questions that adapt to you the way the real PERT does: get one right and the next is harder. At the end you get an estimated PERT score on the real 50 to 150 scale.</p><div class="cards"><button class="card" data-pt="1"><em>${h.length?'Your scores: '+h.slice(-6).map(x=>x.s).join(' → '):'Not taken yet'}</em><b>Take a PERT practice test</b><span>${last?'Latest '+last.s+' · your goal is '+st.target:PN+' questions, no time limit, new questions every time'}</span></button></div>${h.length?chartSVG(h,st.target):''}</div>
    <div class="group"><h3>Starting check</h3><p>Two quick questions per lesson. It sets each lesson to Warm-up or Test level for you. Guessing is fine.</p><div class="cards">${ids.map(id=>{const ks=KEYS.filter(k=>GRP[k]===id);return`<button class="card" data-c="${id}"><em>${st.chk[id]?'Done · take again any time':ks.length*2+' questions'}</em><b>${TESTS[id][0]} starting check</b><span>Lessons ${NUM[ks[0]]} to ${NUM[ks[ks.length-1]]}</span></button>`}).join('')}</div></div>`}
 function start(id,mode){const qs=[];
   if(mode==='check'){KEYS.filter(k=>GRP[k]===id).forEach(k=>[1,2].forEach(lv=>qs.push({k,lv,p:toMC(gen(k,lv)[1]()),pick:null})));run={id,mode,qs,i:0}}
@@ -1184,11 +1317,11 @@ function results(){const{qs,id,mode}=run,by={};let right=0;qs.forEach(x=>{const 
   if(mode==='check'){st.chk[id]=1;addXP(20);const rows=Object.keys(by).map(k=>{const r=by[k][0],s=sk(k);s.lvl=r===0?1:2;if(r===2&&s.n<2)s.n=2;return`<tr><td><a href="#t-${k}" data-k="${k}">Lesson ${NUM[k]}: ${NAME[k]}</a></td><td>${r===2?'Already familiar. Starts at Test level with a head start.':r===1?'Partly there. Starts at Test level.':'Fresh ground. Starts at Warm-up.'}</td></tr>`}).join('');
     const first=Object.keys(by).find(k=>by[k][0]<2)||Object.keys(by)[0];save();
     T.innerHTML=`<div class="pr in"><div class="pr-head"><h3>Your starting points</h3></div><p>Every lesson is now set to a level that fits. Nothing here is a grade. It only decides where each lesson begins.</p><div class="tbl"><table><tr><th>Lesson</th><th>Where you start</th></tr>${rows}</table></div><div class="row l"><a class="btn" href="#t-${first}" data-k="${first}">Begin with Lesson ${NUM[first]}, ${NAME[first]}</a><button class="btn ghost" data-q="quit">Back</button></div></div>`;paint();return}
-  const e=est(qs),s=toScore(e.m),lo=toScore(e.m-e.sd),hi=toScore(e.m+e.sd),B=band(s),h=st.pert=st.pert||[],pb=h.length?Math.max(...h.map(x=>x.s)):0;h.push({d:today(),s,r:right});if(h.length>12)h.shift();save();addXP(right*5);if(h.length>1&&s>pb)confetti();
+  const e=est(qs),s=toScore(e.m),lo=toScore(e.m-e.sd),hi=toScore(e.m+e.sd),B=band(s),h=st.pert=st.pert||[],pb=h.length?Math.max(...h.map(x=>x.s)):0;h.push({d:today(),s,r:right,t:Date.now()});markDay();qs.forEach(x=>{if(!good(x))nbAdd(x.k,x.lv,x.gi)});if(h.length>12)h.shift();save();addXP(right*5);if(h.length>1&&s>pb)confetti();
   const rows=Object.keys(by).sort((a,b)=>by[a][0]/by[a][1]-by[b][0]/by[b][1]).map(k=>`<tr><td><a href="#t-${k}" data-k="${k}">Lesson ${NUM[k]}: ${NAME[k]}</a></td><td class="m">${by[k][0]} of ${by[k][1]}</td><td>${by[k][0]===by[k][1]?'Solid':by[k][0]/by[k][1]>=.5?'Review':'Study this first'}</td></tr>`).join('');
   const miss=qs.filter(x=>!good(x)).map(x=>`<div class="miss"><div class="pr-q">${x.p.q}</div><p><b class="k2">You chose:</b> <span class="m">${esc(x.p.choices[x.pick])}</span> &nbsp; <b class="k3">Correct:</b> <span class="m">${esc(x.p.ans)}</span></p><ol class="hints">${x.p.steps.map(s=>`<li>${s}</li>`).join('')}</ol></div>`).join('');
   const gap=st.target-s;
-  T.innerHTML=`<div class="pr in"><div class="pr-head"><h3>PERT practice test results</h3></div><p class="bigscore">${s}<span class="pr-score"> estimated PERT math score</span></p><div class="meter"><i style="width:${s-50}%"></i></div>
+  T.innerHTML=`<div class="pr in"><div class="pr-head"><h3>PERT practice test results</h3></div>${dialSVG(s,st.target)}<p class="note" style="margin-top:-4px">estimated PERT math score</p>${h.length>1?chartSVG(h,st.target):''}
     <p class="tagline">Likely somewhere from ${lo} to ${hi} · ${right} of ${PN} right · your goal is ${st.target}</p>
     <p><b>${B[1]}.</b> ${B[2]}</p>
     ${gap<=0?`<p class="tip"><b>At your goal.</b> ${h.length>1&&h[h.length-2].s>=st.target?'That is two in a row at your goal, which is strong evidence you are ready.':'Do it once more on another day to show it was not luck.'}</p>`:`<p>${gap<=6?'Close to your goal.':'Room to grow before your goal.'} Work on the lessons at the top of the list below, then take another test in a few days.</p>`}
@@ -1196,7 +1329,7 @@ function results(){const{qs,id,mode}=run,by={};let right=0;qs.forEach(x=>{const 
     <p class="note" style="text-align:left;margin:0">On an adaptive test the number right matters less than how hard your questions got. This is an estimate from this guide's own questions, not an official score.</p>
     <div class="tbl"><table><tr><th>Lesson</th><th>Right</th><th>What to do</th></tr>${rows}</table></div>
     <div class="row l"><button class="btn" data-pt="1">Take another with new questions</button><button class="btn ghost" data-q="quit">Back</button></div>
-    ${miss?`<h3>Questions you missed</h3>${miss}`:''}</div>`;T.querySelectorAll('ol.hints').forEach(work);pretty(T);paint()}
+    ${miss?`<h3>Questions you missed</h3><p class="tagline">All of these are now in your <a href="#t-nb" data-k="nb">mistake notebook</a> for a redo on another day.</p>${miss}`:''}</div>`;T.querySelectorAll('ol.hints').forEach(work);pretty(T);paint();countUp($('dial-n'),s);if(s>=st.target)setTimeout(()=>confetti(90),900)}
 T.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;
   if(b.dataset.pt)return start(null,'pert');if(b.dataset.c&&b.classList.contains('card'))return start(b.dataset.c,'check');
   if(b.dataset.j!==undefined){run.qs[run.i].pick=+b.dataset.j;T.querySelectorAll('.choice').forEach(c=>c.setAttribute('aria-pressed',c===b));T.querySelector('[data-q=next]').disabled=false}
@@ -1314,7 +1447,7 @@ function celNext(){const o=celQ.shift();if(!o){celOpen=false;return}celOpen=true
 function checkLevel(){const l=level();if(l<=(st.lvlSeen||1))return;st.lvlSeen=l;save();const L=LEVELS[l-1],N=LEVELS[l];
   if(l===10)celebrate({big:1,icon:L[1],kicker:'Final level',title:'PERT Ready',text:'Every lesson is Proficient, your last two PERT practice tests reached your goal, and half your lessons held up on a later day. That is real evidence, not luck. You are ready to take it.',btn:'I am ready'});
   else celebrate({icon:L[1],kicker:'Level up',title:'Level '+l,sub:L[2],bar:l===9?ready().pct:8,text:l===9?'The last level is not about points. You reach PERT Ready by proving it: every lesson Proficient and your last two practice tests at your goal score. Your profile shows what is left.':`Next up: ${N[1]} ${N[2]} at ${N[0].toLocaleString('en-US')} XP.`});paintMe()}
-function addXP(n,quiet){if(!n)return;st.xp=(st.xp||0)+n;save();if(!quiet)toast('+'+n+' XP');paintMe();setTimeout(checkLevel,900)}
+function addXP(n,quiet){if(!n)return;st.xp=(st.xp||0)+n;save();if(!quiet)toast('+'+n+' XP');paintMe();setTimeout(()=>{checkLevel();checkRewards()},900)}
 function refreshGoal(){paintMe();const g=document.querySelector('#home-today .goal');if(g)g.outerHTML=goalHTML();if(current==='me'&&!/INPUT/.test((document.activeElement||{}).tagName||''))profile()}
 let lastAct=Date.now();['pointerdown','keydown','scroll','input','touchstart'].forEach(ev=>addEventListener(ev,()=>{lastAct=Date.now()},{passive:true,capture:true}));
 setInterval(()=>{if(document.visibilityState!=='visible'||Date.now()-lastAct>90000)return;const t=today(),s=st.time[t]=(st.time[t]||0)+1,need=needToday();
@@ -1329,13 +1462,17 @@ function profile(){const l=level(),L=LEVELS[l-1],rd=ready(),need=needToday(),m=m
    <div class="block"><h3>Are you ready for the PERT?</h3><p>The final level is not bought with XP. It unlocks when what you have actually solved here shows you are ready.</p><div class="meter"><i style="width:${rd.pct}%"></i></div><p class="tagline"><b>${rd.pct}% of the way to PERT Ready</b></p>
      <div class="tbl"><table>${rows}<tr><td>${rd.rv>=rd.need?'✓':'○'}</td><td><b>It sticks</b></td><td colspan="2">${rd.rv} lessons answered correctly again on a later day (need ${rd.need})</td></tr></table></div>
      <p class="note" style="text-align:left;margin:0">This is the guide's estimate from your work here. No study guide can promise a placement, but meeting all of it is strong evidence.</p></div>
+   ${(st.pert||[]).length?`<div class="block"><h3>Practice test scores</h3>${chartSVG(st.pert,st.target)}</div>`:''}
+   <div class="block"><h3>Notes from Jack</h3>${notesHTML()}</div>
+   <div class="block"><h3>Badges</h3><p class="tagline">${streak()>1?`<span class="streak">🔥 ${streak()}-day streak</span> · `:''}${BADGES.filter(b=>st.bd&&st.bd[b[0]]).length} of ${BADGES.length} earned</p><div class="badges">${badgesHTML()}</div></div>
    <div class="block"><h3>Your plan</h3><div class="ctl plan"><label for="me-date">Test day</label><input type="date" id="me-date" value="${st.test}"><label for="me-goal">Goal score</label><select id="me-goal"><option value="114"${st.target==114?' selected':''}>114 · college-ready (Intermediate Algebra)</option><option value="123"${st.target==123?' selected':''}>123 · College Algebra</option></select></div>
      <p>Today's goal is <b>${need} minutes</b> (${m} done). It is worked out each morning from the lessons you have left and the days until the test, so a missed day spreads itself over the days that remain. Check your college's placement chart for the score you need, and set it as your goal.</p>
      <div class="cal">${cal}</div><p class="tagline"><span class="lg met"></span> goal met &nbsp; <span class="lg part"></span> some study &nbsp; <span class="lg miss"></span> missed</p></div>
+   <div class="block"><h3>Cloud save</h3><div class="sync" id="sync-box">${syncHTML()}</div></div>
    <div class="block"><h3>Levels</h3><div class="tbl"><table>${ladder}</table></div></div>
    <div class="block"><h3>How XP is earned</h3><div class="tbl"><table><tr><th>For</th><th>XP</th></tr><tr><td>A right answer at Warm-up, Test level, Challenge</td><td class="m">5, 10, 15</td></tr><tr><td>Getting it first try with no hints</td><td class="m">+5</td></tr><tr><td>Getting there after two or more wrong tries</td><td class="m">2</td></tr><tr><td>A right answer in a review or mixed session</td><td class="m">+5</td></tr><tr><td>Working a lesson example through to the end</td><td class="m">5</td></tr><tr><td>Each right answer on a practice test</td><td class="m">5</td></tr><tr><td>Meeting the daily study goal</td><td class="m">50</td></tr><tr><td>A lesson reaching Proficient, then Mastered</td><td class="m">50, 100</td></tr></table></div></div>`;
-  $('me-date').onchange=e=>{if(e.target.value){st.test=e.target.value;delete st.goal[today()];save();paint();profile();checkLevel()}};
-  $('me-goal').onchange=e=>{st.target=+e.target.value;delete st.goal[today()];save();paint();profile();checkLevel()}}
+  $('me-date').onchange=e=>{if(e.target.value){st.test=e.target.value;st.setAt=Date.now();delete st.goal[today()];save();paint();profile();checkLevel()}};
+  $('me-goal').onchange=e=>{st.target=+e.target.value;st.setAt=Date.now();delete st.goal[today()];save();paint();profile();checkLevel()}}
 /* ---------- optional lo-fi study beats, made in the browser (no files to load) ---------- */
 const Lofi=(()=>{let ctx,master,lfoG,timer,step=0,nextT=0,on=false,noise;const bpm=74,s16=60/bpm/4,hz=m=>440*Math.pow(2,(m-69)/12);
   const BARS=[{b:38,c:[50,53,57,60,64]},{b:43,c:[53,59,64,69]},{b:36,c:[52,55,59,62]},{b:45,c:[55,60,64,67]}],PENTA=[72,74,76,79,81,84];
@@ -1362,7 +1499,178 @@ const Lofi=(()=>{let ctx,master,lfoG,timer,step=0,nextT=0,on=false,noise;const b
   return{get on(){return on},start,stop,vol(v){if(ctx&&on)master.gain.setTargetAtTime(v,ctx.currentTime,.1)}}})();
 function musicUI(){document.querySelectorAll('[data-mus]').forEach(b=>{b.setAttribute('aria-pressed',Lofi.on);if(b.id==='mus2')b.textContent=Lofi.on?'♪ Lo-fi beats are on. Tap to stop':'♪ Play lo-fi beats'});$('mus-vol').value=Math.round((st.vol==null?.5:st.vol)*100)}
 document.addEventListener('click',e=>{if(!e.target.closest('[data-mus]'))return;try{Lofi.on?Lofi.stop():Lofi.start(st.vol==null?.5:st.vol)}catch(err){}musicUI()});
-$('mus-vol').addEventListener('input',e=>{st.vol=e.target.value/100;save();Lofi.vol(st.vol)});musicUI();
+$('mus-vol').addEventListener('input',e=>{st.vol=e.target.value/100;st.setAt=Date.now();save();Lofi.vol(st.vol)});musicUI();
+/* ---------- flair helpers ---------- */
+const ICON={whole:'🔢',frac:'🍕',dec:'💯',ratio:'⚖️',expr:'✏️',eq:'🟰',lines:'📈',sys:'🔀',pow:'⚡',polyf:'🧩',quad:'🏹',radrat:'🌀',fn:'⚙️',geo:'📐'};
+document.querySelectorAll('.card[data-k]').forEach(c=>{if(ICON[c.dataset.k])c.dataset.ic=ICON[c.dataset.k]});
+const GH={'Number skills':'🐚','PERT algebra':'🌊','Extra':'🏝️'};document.querySelectorAll('#t-home .group>h3').forEach(h=>{const e=GH[h.textContent.trim()];if(e)h.insertAdjacentHTML('afterbegin',`<span aria-hidden="true">${e}</span>`)});
+function paintHero(){const g=$('greet'),c=$('chips');if(!g)return;const h=new Date().getHours(),sk=streak(),l=level(),L=LEVELS[l-1],ps=(st.pert||[]).map(x=>x.s),left=dd(today(),st.test);
+  g.textContent=(h<5?'Up late, Bailey':h<12?'Good morning, Bailey':h<17?'Good afternoon, Bailey':'Good evening, Bailey')+' 🌺';
+  c.innerHTML=`<span>${L[1]} Level ${l} · ${L[2]}</span>${sk>1?`<span>🔥 ${sk}-day streak</span>`:''}${ps.length?`<span>📝 Best ${Math.max(...ps)}</span>`:''}${left>0?`<span>🗓️ ${left} ${left===1?'day':'days'} to go</span>`:left===0?'<span>🎓 Test day!</span>':''}`}
+const EMO=['🌺','🐠','🐢','🌊','⭐','✨','🐬','🌴'];
+function burst(el,n){if(calm||!el)return;const r=el.getBoundingClientRect();for(let i=0;i<(n||6);i++){const e=document.createElement('span');e.className='pop-emoji';e.textContent=pick(EMO);e.style.cssText=`left:${r.left+r.width*(.2+Math.random()*.6)}px;top:${r.top}px;--dx:${R(-70,70)}px;--r:${R(-40,40)}deg;animation-delay:${i*40}ms`;document.body.appendChild(e);setTimeout(()=>e.remove(),1500)}}
+function dialSVG(sc,goal){const cx=160,cy=150,r=118,ang=v=>Math.PI*(1-(v-50)/100),P=(v,rr)=>[cx+rr*Math.cos(ang(v)),cy-rr*Math.sin(ang(v))],arc=(a,b,col)=>{const[x1,y1]=P(a,r),[x2,y2]=P(b,r);return`<path d="M${x1} ${y1}A${r} ${r} 0 0 1 ${x2} ${y2}" fill="none" stroke="${col}" stroke-width="18"/>`};
+  const[gx1,gy1]=P(goal,r-14),[gx2,gy2]=P(goal,r+14),[gl,gt]=P(goal,r+26);
+  return`<svg class="dial" viewBox="0 -12 320 236" role="img" aria-label="Estimated score ${sc} on a scale from 50 to 150, goal ${goal}">${arc(50,95.5,'var(--bad)')}${arc(96,113.5,'var(--hi)')}${arc(114,122.5,'var(--good)')}${arc(123,150,'var(--c4)')}
+   <line x1="${gx1}" y1="${gy1}" x2="${gx2}" y2="${gy2}" stroke="var(--ink)" stroke-width="3"/><text class="lbl" x="${gl}" y="${gt}" text-anchor="middle">goal ${goal}</text>
+   <g id="needle" style="transform-origin:${cx}px ${cy}px;transform:rotate(${(sc-50)/100*180-90}deg)"><line x1="${cx}" y1="${cy}" x2="${cx}" y2="${cy-r+30}" stroke="var(--ink)" stroke-width="5" stroke-linecap="round"/></g><circle cx="${cx}" cy="${cy}" r="9" fill="var(--ink)"/>
+   <text class="lbl" x="${cx-r}" y="${cy+22}" text-anchor="middle">50</text><text class="lbl" x="${cx+r}" y="${cy+22}" text-anchor="middle">150</text>
+   <text class="big" x="${cx}" y="${cy+62}" text-anchor="middle" id="dial-n">${sc}</text></svg>`}
+function countUp(el,to){if(!el||calm)return;el.textContent=to;setTimeout(()=>{el.textContent=to},1700);let t0=null;requestAnimationFrame(function f(t){if(t0===null)t0=t;const p=Math.max(0,Math.min(1,(t-t0)/1400)),e=1-Math.pow(1-p,3);el.textContent=Math.round(50+(to-50)*e);if(p<1)requestAnimationFrame(f);else el.textContent=to});
+  const n=$('needle');if(n){const end=n.style.transform;requestAnimationFrame(()=>{n.style.transition='none';n.style.transform='rotate(-90deg)';void n.getBoundingClientRect();n.style.transition='transform 1.4s cubic-bezier(.2,.8,.2,1)';n.style.transform=end})}}
+/* ================= streaks, badges, notes from Jack, notebook, speed round, cloud save ================= */
+function markDay(){const t=today();if(!st.days.includes(t))st.days=[...st.days,t].slice(-400);const h=new Date().getHours();if(h>=22||h<3)st.owl=1;if(h>=4&&h<8)st.early=1}
+const dayAdd=(s,n)=>{const d=new Date(s+'T12:00:00');d.setDate(d.getDate()+n);return iso(d)};
+function streak(){const set=new Set(st.days);let d=today();if(!set.has(d))d=dayAdd(d,-1);let n=0;while(set.has(d)){n++;d=dayAdd(d,-1)}return n}
+const allP=g=>KEYS.filter(k=>GRP[k]===g).every(k=>status(k)>=2);
+const pScores=()=>(st.pert||[]).map(x=>x.s);
+
+const BADGES=[
+ ['first','🌱','First step','Get your first problem right',()=>st.solved>=1],
+ ['st3','🔥','On a roll','Study 3 days in a row',()=>streak()>=3],
+ ['st7','⚡','Full week','Study 7 days in a row',()=>streak()>=7],
+ ['st14','🌋','Unstoppable','Study 14 days in a row',()=>streak()>=14],
+ ['prof','⭐','Got it','Make a lesson Proficient',()=>KEYS.some(k=>status(k)>=2)],
+ ['mast','💎','Locked in','Make a lesson Mastered',()=>KEYS.some(k=>status(k)>=3)],
+ ['num','🧮','Number pro','Every number skills lesson Proficient',()=>allP('B')],
+ ['alg','📐','Algebra pro','Every PERT algebra lesson Proficient',()=>allP('P')],
+ ['t1','📝','Test run','Finish a PERT practice test',()=>pScores().length>=1],
+ ['up','📈','Climbing','Beat your first practice score by 5 points',()=>{const s=pScores();return s.length>1&&Math.max(...s.slice(1))>=s[0]+5}],
+ ['goal','🎯','Goal reached','Reach your goal score on a practice test',()=>pScores().some(x=>x>=st.target)],
+ ['p100','💯','Hundred club','Solve 100 problems',()=>st.solved>=100],
+ ['p500','🏅','Math machine','Solve 500 problems',()=>st.solved>=500],
+ ['nb10','📓','Fixer','Clear 10 problems from the mistake notebook',()=>(st.nbCleared||0)>=10],
+ ['sp15','🏎️','Quick hands','Score 15 in a speed round',()=>(st.spBest||0)>=15],
+ ['sp25','🚀','Lightning','Score 25 in a speed round',()=>(st.spBest||0)>=25],
+ ['owl','🦉','Night owl','Study after 10 pm',()=>!!st.owl],
+ ['early','🌅','Early bird','Study before 8 am',()=>!!st.early],
+ ['ready','🎓','PERT Ready','Reach the final level',()=>level()===10]];
+const BDONE={"first": "You got your first problem right.", "st3": "You studied 3 days in a row.", "st7": "You studied 7 days in a row.", "st14": "You studied 14 days in a row.", "prof": "You made a lesson Proficient.", "mast": "You Mastered a lesson: you still had it days later.", "num": "Every number skills lesson is Proficient.", "alg": "Every PERT algebra lesson is Proficient.", "t1": "You finished a PERT practice test.", "up": "You beat your first practice score by 5 points or more.", "goal": "You reached your goal score on a practice test.", "p100": "You have solved 100 problems.", "p500": "You have solved 500 problems.", "nb10": "You cleared 10 problems from your mistake notebook.", "sp15": "You scored 15 in a speed round.", "sp25": "You scored 25 in a speed round.", "owl": "You studied after 10 pm.", "early": "You studied before 8 am.", "ready": "You reached the final level."};
+function badgesHTML(){st.bd=st.bd||{};return BADGES.map(b=>`<div class="badge${st.bd[b[0]]?'':' off'}"><i>${b[1]}</i><div><b>${b[2]}</b><span>${st.bd[b[0]]?'Earned '+fmtDay(st.bd[b[0]]):b[3]}</span></div></div>`).join('')}
+
+/* Notes from Jack: each unlocks once, at a milestone. Edit the words freely. */
+const NOTES=[
+ ['start','You started!',()=>st.solved>=1,"You started. Honestly that is the hardest part, and you already did it. Proud of you."],
+ ['st3','Three days in a row',()=>streak()>=3,"Three days in a row. A little bit every day is exactly how this works. Keep it going."],
+ ['prof','Your first lesson',()=>KEYS.some(k=>status(k)>=2),"Your first lesson is Proficient. That one is yours now. On to the next."],
+ ['t1','First practice test',()=>pScores().length>=1,"First practice test done. Whatever the number was, it is just the starting line. Now you know exactly what to work on."],
+ ['comeback','Welcome back',()=>!!st.cbNow,"Welcome back! Breaks happen to everyone. One short session today is all it takes to get rolling again."],
+ ['num','Number skills done',()=>allP('B'),"All the number skills are done. That is the foundation everything else sits on, and yours is solid."],
+ ['up','Your score went up',()=>{const s=pScores();return s.length>1&&Math.max(...s.slice(1))>=s[0]+5},"Your practice score went up. That is not luck, that is your work showing. I love seeing it."],
+ ['half','Halfway there',()=>{const ks=KEYS.filter(k=>GRP[k]!=='X');return ks.filter(k=>status(k)>=2).length>=Math.ceil(ks.length/2)},"Halfway through the lessons. You are really doing this."],
+ ['st7','A whole week',()=>streak()>=7,"A whole week straight. I know it is not always easy to sit down and do math after a long day. You are doing it anyway, and that says a lot about you."],
+ ['p100','100 problems',()=>st.solved>=100,"100 problems solved. That is a lot of math. Treat yourself to something good tonight."],
+ ['nb10','Ten fixed for good',()=>(st.nbCleared||0)>=10,"Ten mistakes fixed for good. That is literally how scores go up."],
+ ['goal','Goal score!',()=>pScores().some(x=>x>=st.target),"You hit your goal score on a practice test! Do it one more time and you will know it was not a fluke."],
+ ['alg','Algebra done',()=>allP('P'),"Every algebra lesson is Proficient. That is the whole heart of the test. Seriously impressive."],
+ ['ready','PERT Ready',()=>level()===10,"PERT Ready. You put in the work and it shows. Go in calm, take your time on every question, and remember there is no clock. I am so proud of you."],
+ ['testday','Test day',()=>today()===st.test,"It is test day! You have prepared for this. Breathe, read each question twice, and trust your work. I cannot wait to hear how it goes."]];
+function notesHTML(){st.notes=st.notes||{};const got=NOTES.filter(n=>st.notes[n[0]]),left=NOTES.length-got.length;
+  return`<p class="tagline">${got.length?'Tap back through these any time.':'Jack hid notes for you along the way. They unlock as you hit milestones.'}${left?` ${left} still locked.`:''}</p><div class="notes">${got.slice().reverse().map(n=>`<div class="note-card"><small>💌 ${n[1]} · ${fmtDay(st.notes[n[0]])}</small><p>${n[3]}</p><p><b>Jack</b></p></div>`).join('')}</div>`}
+function checkRewards(){st.bd=st.bd||{};st.notes=st.notes||{};const t=today();let changed=false;
+  const nb=BADGES.filter(b=>!st.bd[b[0]]&&b[4]());nb.forEach(b=>{st.bd[b[0]]=t;changed=true});if(nb.length===1)celebrate({icon:nb[0][1],kicker:'Badge earned',title:nb[0][2],text:BDONE[nb[0][0]],btn:'Nice'});else if(nb.length>1)celebrate({icon:`<span style="font-size:1.9rem">${nb.map(b=>b[1]).slice(0,3).join('')}</span>`,kicker:nb.length+' badges earned',title:nb.map(b=>b[2]).join(' · '),text:nb.map(b=>BDONE[b[0]]).join(' '),btn:'Nice'});
+  NOTES.forEach(n=>{if(!st.notes[n[0]]&&n[2]()){st.notes[n[0]]=t;changed=true;celebrate({icon:'💌',kicker:'A note from Jack',title:n[1],text:`<span class="letter">${n[3]}<br><br><b>Jack</b></span>`,btn:'Love it'})}});
+  if(changed){save();if(current==='me')profile()}}
+(function comeback(){const last=st.days.length?st.days.slice().sort().pop():null;st.cbNow=last&&dd(last,today())>=3?1:0})();
+
+/* score chart: practice test scores over time against the goal line */
+function chartSVG(h,goal){const W=420,H=190,L=34,R=14,T=14,B=26,s=h.map(x=>x.s),lo=Math.max(50,Math.floor((Math.min(...s,goal)-8)/10)*10),hi=Math.min(150,Math.ceil((Math.max(...s,goal)+8)/10)*10),
+  X=i=>L+(s.length<2?(W-L-R)/2:i*(W-L-R)/(s.length-1)),Y=v=>T+(hi-v)/(hi-lo)*(H-T-B);let g='';
+  for(let v=lo;v<=hi;v+=10)g+=`<line class="gl" x1="${L}" x2="${W-R}" y1="${Y(v)}" y2="${Y(v)}"/><text x="${L-6}" y="${Y(v)+4}" text-anchor="end">${v}</text>`;
+  g+=`<line class="goal" x1="${L}" x2="${W-R}" y1="${Y(goal)}" y2="${Y(goal)}"/><text class="gt" x="${L+6}" y="${Y(goal)-6}">Goal ${goal}</text>`;
+  if(s.length>1)g+=`<polyline class="ln" points="${s.map((v,i)=>X(i)+','+Y(v)).join(' ')}"/>`;
+  s.forEach((v,i)=>{g+=`<circle class="pt" cx="${X(i)}" cy="${Y(v)}" r="5"/>`;if(i===s.length-1||s.length<=8)g+=`<text class="vt" x="${X(i)}" y="${Y(v)-10}" text-anchor="middle">${v}</text>`});
+  g+=`<text x="${L}" y="${H-6}">Test 1</text><text x="${W-R}" y="${H-6}" text-anchor="end">Test ${s.length}</text>`;
+  return`<svg class="chart" viewBox="0 0 ${W} ${H}" role="img" aria-label="Practice test scores: ${s.join(', ')}. Goal ${goal}.">${g}</svg>`}
+
+/* mistake notebook: a missed problem type comes back with new numbers until it is right on two different days */
+st.nb=st.nb||[];
+function nbAdd(k,lv,gi){if(gi==null||gi<0||!G[k]||!G[k][gi])return;const x=st.nb.find(y=>y.k===k&&y.gi===gi);if(x)x.ok=[];else{st.nb.push({k,lv,gi,d:today(),ok:[],at:Date.now()});if(st.nb.length>60)st.nb.shift()}save()}
+function nbHit(x,clean){if(!clean){x.ok=[];save();return' It stays in the notebook for another try.'}const t=today();if(!x.ok.includes(t))x.ok.push(t);
+  if(x.ok.length>=2){st.nb=st.nb.filter(y=>y!==x);st.nbGone=st.nbGone||{};st.nbGone[x.k+'|'+x.gi]=Date.now();st.nbCleared=(st.nbCleared||0)+1;save();return' <b>Out of the notebook for good.</b>'}save();return' Get this kind right again on another day and it leaves the notebook.'}
+let nbRun=null;const NA=$('nb-area');
+function nbIntro(){nbRun=null;const n=st.nb.length,by={};st.nb.forEach(x=>by[x.k]=(by[x.k]||0)+1);
+  NA.innerHTML=!n?`<div class="today"><h3>${st.nbCleared?'Notebook clear':'Nothing here yet'}</h3><p>${st.nbCleared?`You have fixed ${st.nbCleared} ${st.nbCleared===1?'problem':'problems'} for good. Anything you miss from now on shows up here.`:'Problems you miss in lessons, sessions and practice tests will show up here for a redo.'}</p></div>`
+   :`<div class="today"><h3>${n} ${n===1?'problem':'problems'} to redo</h3><p>Each comes back with new numbers. Get it right with no hints on two different days and it is gone.${st.nbCleared?` You have cleared ${st.nbCleared} so far.`:''}</p><div class="tbl"><table><tr><th>Lesson</th><th>To redo</th></tr>${Object.keys(by).map(k=>`<tr><td><a href="#t-${k}" data-k="${k}">Lesson ${NUM[k]}: ${NAME[k]}</a></td><td class="m">${by[k]}</td></tr>`).join('')}</table></div><div class="row l"><button class="btn" id="nb-go">Redo ${Math.min(n,10)} now</button></div></div>`;
+  const b=$('nb-go');if(b)b.onclick=nbStart}
+function nbStart(){const t=today(),q=shuffle(st.nb.filter(x=>!x.ok.includes(t))).slice(0,10);if(!q.length){NA.innerHTML=`<div class="today"><h3>Done for today</h3><p>Everything left in the notebook was already right today. Come back tomorrow to finish them off.</p></div>`;return}
+  nbRun=1;NA.innerHTML='<div id="nb-pr"></div>';
+  mount($('nb-pr'),{id:'nb',nb:1,title:'Mistake notebook',score:c=>`Problem ${c} of ${q.length}`,last:c=>c>=q.length,
+    next:({count})=>{if(count>=q.length)return null;const x=q[count];return{key:x.k,lv:x.lv,gi:x.gi,nbx:x,p:G[x.k][x.gi][1](),review:true,tag:`From Lesson ${NUM[x.k]}, ${NAME[x.k]}.`}},
+    done:()=>{nbRun=null;confetti();nbIntro();paint();checkRewards()}})}
+
+/* speed round: 60 seconds of quick mental math */
+const SPD=[
+ ()=>{const a=R(3,12),b=R(3,12);return[`${a} × ${b}`,a*b]},
+ ()=>{const a=R(3,12),b=R(3,12);return[`${a*b} ÷ ${a}`,b]},
+ ()=>{const a=R(2,15),b=R(2,15);return[`−${a} + ${b}`,b-a]},
+ ()=>{const a=R(2,12),b=R(2,12);return[`${a} − (−${b})`,a+b]},
+ ()=>{const a=R(2,9),b=R(2,9);return[`(−${a}) × ${b}`,-a*b]},
+ ()=>{const a=R(2,9),b=R(2,9);return[`(−${a})(−${b})`,a*b]},
+ ()=>{const p=pick([10,20,25,50,75]),n=pick([20,40,60,80,100,200]);return[`${p}% of ${n}`,p*n/100]},
+ ()=>{const[a,b]=pick([[1,2],[1,3],[2,3],[1,4],[3,4],[1,5],[2,5]]),n=b*R(2,9);return[`${a}/${b} of ${n}`,a*n/b]},
+ ()=>{const n=R(2,15);return[`${n}²`,n*n]},
+ ()=>{const n=R(2,13);return[`√${n*n}`,n]},
+ ()=>{const n=R(2,6);return[`2${sup(n)}`,2**n]},
+ ()=>{const a=R(2,9),b=R(2,5),c=R(2,5);return[`${a} + ${b} × ${c}`,a+b*c]},
+ ()=>{const x=R(-9,12),a=R(2,15);return[`x + ${a} = ${x+a}, so x =`,x]},
+ ()=>{const x=R(-9,9)||3,a=R(2,9);return[`${a}x = ${a*x}, so x =`,x]},
+ ()=>{const[f,d]=pick([['1/2',.5],['1/4',.25],['3/4',.75],['1/5',.2],['2/5',.4],['1/10',.1],['3/5',.6]]);return[`${f} as a decimal`,d]}];
+let spRun=null;const SA=$('sp-area');
+function spIntro(){spRun=null;const h=st.spHist||[];
+  SA.innerHTML=`<div class="today"><h3>${st.spBest?'Best so far: '+st.spBest:'Ready?'}</h3><p>Answer as many as you can in 60 seconds. Type the answer and press Enter. A miss just moves you on to the next one. Every right answer is worth 2 XP.</p>${h.length?`<p class="tagline">Recent rounds: ${h.slice(-8).join(' → ')}</p>`:''}<div class="row l"><button class="btn" id="sp-go">Start 60 seconds</button></div></div>`;
+  $('sp-go').onclick=spStart}
+function spStart(){let score=0,left=60,cur,miss=0;spRun=1;
+  SA.innerHTML=`<div class="pr"><div class="pr-head"><h3>Speed round</h3><span class="pr-score" id="sp-sc">0 right</span></div><div class="timer" id="sp-t">60</div><div class="spq" id="sp-q"></div><div class="pr-in"><input id="sp-in" type="text" inputmode="decimal" autocomplete="off" aria-label="Your answer" placeholder="Answer"><button class="key" data-a="neg" aria-label="Make negative">±</button><button class="btn" id="sp-ok">Enter</button></div><p class="fb" id="sp-fb" hidden></p></div>`;
+  const inp=$('sp-in'),qEl=$('sp-q');
+  function nextQ(){cur=pick(SPD)();qEl.innerHTML=`<span class="m">${cur[0]}</span>`;pretty(qEl);inp.value='';inp.focus()}
+  function check(){if(!spRun||!inp.value.trim())return;const v=parseNum(inp.value),fb=$('sp-fb');
+    if(!isNaN(v)&&same(v,cur[1])){score++;$('sp-sc').textContent=score+' right';fb.hidden=true}else{miss++;fb.hidden=false;fb.className='fb no';fb.textContent=`${cur[0].replace(/, so x =$/,'')}: the answer was ${fmtN(cur[1])}`;anim(qEl,'shake')}nextQ()}
+  $('sp-ok').onclick=check;inp.addEventListener('keydown',e=>{if(e.key==='Enter')check()});
+  SA.querySelector('[data-a=neg]').onclick=()=>{inp.value=/^[-−]/.test(inp.value)?inp.value.slice(1):'-'+inp.value;inp.focus()};
+  nextQ();const tm=setInterval(()=>{if(current!=='speed'){clearInterval(tm);spRun=null;return}left--;const t=$('sp-t');t.textContent=left;t.classList.toggle('low',left<=10);if(left<=0){clearInterval(tm);spEnd(score,miss)}},1000)}
+function spEnd(score,miss){spRun=null;const pb=st.spBest||0;st.spHist=[...(st.spHist||[]),score].slice(-20);if(score>pb)st.spBest=score;if(score)markDay();save();if(score)addXP(score*2);if(score>pb&&pb)confetti();
+  SA.innerHTML=`<div class="today in"><h3>${score} right${score>pb&&pb?' · new best!':''}</h3><p>${score>pb&&pb?`That beats your old best of ${pb}.`:pb&&score<pb?`Your best is ${pb}. Speed comes from doing a round most days.`:'A round most days makes the basics automatic.'}${miss?` ${miss} missed, and those are worth slowing down for next time.`:''}</p><div class="row l"><button class="btn" id="sp-go">Go again</button><a class="btn ghost" href="#t-home" data-k="home">Home</a></div></div>`;
+  $('sp-go').onclick=spStart;checkRewards()}
+
+/* cloud save: progress kept under a private code, merged across devices */
+var cloudSoon=null;
+(function cloud(){const API='https://uyipfjvehybciqmkrjwc.supabase.co/rest/v1/rpc/',KEY='sb_publishable_AFlm53vsZixo915A_jopzw_PFlephpL',CS='pertSync';
+  let c=null;try{c=JSON.parse(localStorage.getItem(CS))}catch(e){}
+  const m=/[#&]sync=([A-Za-z0-9-]{12,64})/.exec(location.hash);
+  if(m){if(!c||c.code!==m[1])c={code:m[1],ver:0};try{history.replaceState(null,'',location.pathname+location.search)}catch(e){}}
+  if(!c){const a='abcdefghjkmnpqrstuvwxyz23456789';let r='';for(let i=0;i<10;i++)r+=a[Math.floor(Math.random()*a.length)];c={code:'pert-'+r,ver:0}}
+  const keep=()=>{try{localStorage.setItem(CS,JSON.stringify(c))}catch(e){}};keep();
+  let timer=null,busy=false,again=false,last=null,fail=false;
+  async function rpc(fn,body){const r=await fetch(API+fn,{method:'POST',headers:{apikey:KEY,'Content-Type':'application/json'},body:JSON.stringify(body)});if(!r.ok)throw new Error(r.status);return r.json()}
+  function adopt(remote){const before=JSON.stringify(st);Object.assign(st,mergeSt(st,remote));try{localStorage.setItem(LS,JSON.stringify(st))}catch(e){}return before!==JSON.stringify(st)}
+  async function push(){if(busy){again=true;return}busy=true;
+    try{for(let i=0;i<3;i++){const r=await rpc('pert_save',{p_code:c.code,p_state:st,p_version:c.ver});if(r.ok){c.ver=r.version;keep();break}c.ver=r.version;keep();if(r.state&&adopt(r.state))refresh()}last=Date.now();fail=false}catch(e){fail=true}
+    busy=false;paintSync();if(again){again=false;push()}}
+  async function pull(){try{const r=await rpc('pert_get',{p_code:c.code});if(r&&r.state){c.ver=r.version;keep();if(adopt(r.state))refresh()}last=Date.now();fail=false;push()}catch(e){fail=true}paintSync()}
+  function refresh(){paint();if(current==='me')profile();if(current==='test'&&!run)menu();if(current==='nb'&&!nbRun)nbIntro()}
+  cloudSoon=()=>{clearTimeout(timer);timer=setTimeout(push,3000)};
+  window.syncInfo=()=>({code:c.code,last,fail,link:location.origin+location.pathname+'#sync='+c.code});
+  window.syncUse=code=>{code=String(code).trim().replace(/^.*#sync=/,'');if(!/^[A-Za-z0-9-]{12,64}$/.test(code))return false;c={code,ver:0};keep();pull();return true};
+  pull();document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')pull();else if(timer){clearTimeout(timer);push()}});addEventListener('online',pull)})();
+function mergeSt(a,b){const N=(a.saved||0)>=(b.saved||0)?a:b,o=Object.assign({},b,a);
+  ['xp','solved','lvlSeen','nbCleared','spBest','owl','early'].forEach(k=>{o[k]=Math.max(+a[k]||0,+b[k]||0)});
+  o.days=[...new Set([...(a.days||[]),...(b.days||[])])].sort().slice(-400);
+  ['time','goal','met','ex','chk','bd','notes'].forEach(k=>{const r=Object.assign({},b[k]||{});Object.entries(a[k]||{}).forEach(([x,v])=>{r[x]=typeof v==='number'&&typeof r[x]==='number'?Math.max(v,r[x]):(r[x]!=null&&typeof v==='string'&&r[x]<v?r[x]:v)});o[k]=r});
+  o.sk=Object.assign({},b.sk||{});Object.entries(a.sk||{}).forEach(([k,s])=>{const r=o.sk[k];o.sk[k]=!r||(s.n+10*s.rv)>=(r.n+10*r.rv)?s:r});
+  const seen=new Set();o.pert=[...(b.pert||[]),...(a.pert||[])].filter(x=>{const id=(x.t||'')+'|'+x.d+'|'+x.s+'|'+x.r;if(seen.has(id))return false;seen.add(id);return true}).sort((x,y)=>(x.t||0)-(y.t||0)).slice(-20);
+  const S=(a.setAt||0)>=(b.setAt||0)?a:b;['test','target','vol'].forEach(k=>{if(S[k]!==undefined)o[k]=S[k]});o.setAt=Math.max(a.setAt||0,b.setAt||0);
+  if(a.start&&b.start)o.start=a.start<b.start?a.start:b.start;o.spHist=(a.spHist||[]).length>=(b.spHist||[]).length?a.spHist:b.spHist;o.cbNow=a.cbNow;
+  o.nbGone=Object.assign({},b.nbGone||{},a.nbGone||{});const nb={};[...(b.nb||[]),...(a.nb||[])].forEach(x=>{const id=x.k+'|'+x.gi,g=o.nbGone[id];if(g&&g>=(x.at||0))return;const y=nb[id];nb[id]=!y?{...x}:{...y,ok:[...new Set([...(y.ok||[]),...(x.ok||[])])].sort(),at:Math.max(y.at||0,x.at||0)}});o.nb=Object.values(nb).sort((x,y)=>(x.at||0)-(y.at||0)).slice(-60);
+  o.saved=Math.max(a.saved||0,b.saved||0);return o}
+function syncHTML(){const i=window.syncInfo?syncInfo():null;if(!i)return'';
+  return`<p>Your progress saves to the cloud by itself, so it is safe even if this browser gets cleared. <span class="tagline" id="sync-st">${i.fail?'Offline right now. It will catch up when you are back online.':i.last?'Up to date.':'Connecting…'}</span></p>
+   <p><b>Use it on another device too.</b> Open this link on your phone or another computer and the same progress follows you there:</p>
+   <input id="sync-link" readonly value="${i.link}" aria-label="Your personal link"><div class="row l"><button class="btn ghost sm" id="sync-copy">Copy my link</button></div>
+   <p class="tagline">Keep this link to yourself. Anyone who has it can see and change your progress.</p>`}
+function paintSync(){const e=$('sync-st');if(!e)return;const i=syncInfo();e.textContent=i.fail?'Offline right now. It will catch up when you are back online.':'Up to date.'}
+document.addEventListener('click',e=>{if(e.target.id==='sync-copy'){const v=$('sync-link');v.select();try{navigator.clipboard.writeText(v.value)}catch(x){document.execCommand('copy')}e.target.textContent='Copied'}});
+setTimeout(checkRewards,1500);
 show((location.hash||'#home').slice(1).replace(/^t-/,''));
 if('serviceWorker' in navigator&&location.protocol==='https:')navigator.serviceWorker.register('sw.js').catch(()=>{});
 }

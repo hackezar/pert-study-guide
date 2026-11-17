@@ -1,5 +1,5 @@
 /* Network first, so every online visit gets the newest version; the cache is only the offline fallback. */
-const C = 'pert-guide-v1';
+const C = 'pert-guide-v2';
 const CORE = ['./', './index.html', './manifest.webmanifest', './icon.svg', './icon-192.png'];
 self.addEventListener('install', e => { self.skipWaiting(); e.waitUntil(caches.open(C).then(c => c.addAll(CORE))); });
 self.addEventListener('activate', e => e.waitUntil(

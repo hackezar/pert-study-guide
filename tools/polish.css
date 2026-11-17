@@ -1,0 +1,43 @@
+/* ---------- polish: softer surfaces, smooth motion, mobile tab bar ---------- */
+body{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+.top{background:color-mix(in srgb,var(--bg) 80%,transparent);-webkit-backdrop-filter:saturate(1.5) blur(12px);backdrop-filter:saturate(1.5) blur(12px)}
+.hero{background-color:var(--bg);background-image:radial-gradient(circle at 92% 0%,color-mix(in srgb,var(--accent) 22%,transparent),transparent 55%),radial-gradient(circle at 0% 100%,color-mix(in srgb,var(--hi) 22%,transparent),transparent 50%),linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:auto,auto,24px 24px,24px 24px}
+.hero h1{background:linear-gradient(100deg,var(--ink) 30%,var(--accent));-webkit-background-clip:text;background-clip:text;color:transparent}
+.btn,.card,.choice,.key,.seg button,.badge,.linkbtn,.mus,.me,input,select{transition:transform .18s cubic-bezier(.2,.8,.2,1),box-shadow .2s ease,background-color .2s ease,border-color .2s ease,color .2s ease,opacity .2s}
+.btn{border-radius:12px;padding:11px 18px}
+.btn:not(.ghost){box-shadow:0 8px 18px -10px color-mix(in srgb,var(--accent) 80%,transparent)}
+.btn.ghost{background:color-mix(in srgb,var(--accent) 6%,transparent)}
+.btn:hover:not(:disabled){transform:translateY(-1px)}
+.btn:active:not(:disabled),.choice:active:not(:disabled),.card:active,.key:active{transform:translateY(1px) scale(.98)}
+.card{border-radius:16px;box-shadow:0 1px 2px rgba(30,15,70,.06)}
+.card:hover{transform:translateY(-2px);border-color:color-mix(in srgb,var(--accent) 55%,var(--line));box-shadow:0 14px 28px -18px rgba(70,35,160,.55)}
+.choice{border-radius:12px;border-color:var(--line);background:var(--surface)}
+.choice:hover:not(:disabled):not(.right):not(.wrong){border-color:var(--accent);transform:translateY(-1px)}
+.pr{border:1.5px solid var(--line);border-radius:18px;box-shadow:0 18px 40px -28px rgba(50,25,120,.55);padding:18px}
+.today{border-radius:18px;border-width:1.5px;box-shadow:0 18px 40px -30px rgba(50,25,120,.6);background:linear-gradient(160deg,color-mix(in srgb,var(--accent) 7%,var(--surface)),var(--surface) 60%)}
+.widget,.ex{border-radius:16px;box-shadow:0 1px 2px rgba(30,15,70,.05)}
+.warn,.tip,.fb{border-radius:12px}
+.meter,.bar{border-radius:999px}.meter i{border-radius:999px;background:linear-gradient(90deg,var(--accent),var(--c4))}
+.pr-in input:focus,.sync input:focus,select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 4px color-mix(in srgb,var(--accent) 22%,transparent)}
+.seg{border-color:var(--line);border-radius:12px;background:var(--surface)}
+.seg button[aria-pressed="true"]{background:var(--accent);color:var(--on-accent)}
+.lvlup{-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}
+.lvcard{border-radius:22px;box-shadow:0 30px 60px -20px rgba(0,0,0,.5)}
+@media (prefers-reduced-motion:no-preference){
+  .in{animation:stepin .38s cubic-bezier(.2,.8,.2,1) both}
+  .choice.right{animation:pop .35s ease-out}
+  .lvlup{animation:fadein .2s ease-out}
+}
+@keyframes fadein{from{opacity:0}to{opacity:1}}
+/* bottom tab bar on phones */
+.tabbar{display:none}
+@media (max-width:720px){
+  .tabbar{display:grid;grid-template-columns:repeat(5,1fr);position:fixed;left:0;right:0;bottom:0;z-index:6;padding:6px 6px calc(6px + env(safe-area-inset-bottom,0px));background:color-mix(in srgb,var(--surface) 86%,transparent);-webkit-backdrop-filter:saturate(1.5) blur(14px);backdrop-filter:saturate(1.5) blur(14px);border-top:1px solid var(--line)}
+  .tabbar a{display:flex;flex-direction:column;align-items:center;gap:1px;padding:5px 0;border-radius:12px;text-decoration:none;color:var(--muted);font:600 .7rem var(--body);position:relative}
+  .tabbar a span{font-size:1.25rem;line-height:1.2;transition:transform .2s cubic-bezier(.2,.8,.2,1)}
+  .tabbar a.on{color:var(--accent);background:color-mix(in srgb,var(--accent) 10%,transparent)}
+  .tabbar a.on span{transform:translateY(-1px) scale(1.12)}
+  .tabbar a b{position:absolute;top:2px;right:calc(50% - 22px);min-width:17px;height:17px;border-radius:9px;background:var(--bad);color:#fff;font:700 .65rem/17px var(--body);text-align:center;padding:0 4px}
+  .wrap{padding-bottom:96px}
+  .xptoast{right:12px}
+}
