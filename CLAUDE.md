@@ -15,6 +15,8 @@ the Accuplacer guide that was a claude.ai artifact ("Bailey's Study Guide", http
 - `index.html` holds everything: lessons, question generators `G.*`, practice engine, adaptive PERT practice test
   (`DIFF`, `est`, score = 100 + 16·θ clamped 50-150), notebook, speed round, badges `BADGES`, notes from Jack
   `NOTES` (written by Claude in Jack's voice; Jack may want to edit them), cloud sync, lo-fi music.
+- Practice test "Show me how" (`walkThrough`): steps one at a time, then the answer; sets `x.shown=1, x.pick=-1`, so
+  the question scores as wrong and goes to the notebook.
 - Florida cut scores used: 114 college-ready (MAT 1033), 123 College Algebra (MAC 1105). Colleges vary.
 - Tests: `python tools/smoke.py` (43 end-to-end checks in headless Chrome, cloud disabled) and
   `python tools/shots.py OUTDIR` (light/dark screenshots). Headless screenshots freeze requestAnimationFrame, so

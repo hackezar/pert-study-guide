@@ -55,6 +55,14 @@ async function main(){try{
     await new Promise(r=>setTimeout(r,1700));ok(document.getElementById('dial-n').textContent==String(st().pert.slice(-1)[0].s),'dial counts up to the saved score '+document.getElementById('dial-n').textContent);
     closePops();C('[data-q=quit]')}
   ok(!!document.querySelector('#test-area svg.chart'),'score chart on the practice test page');
+  // "Show me how": walk through every step, answer shown, counted as missed
+  {const before=st().nb.length;C('[data-pt]');const r=__R(),x=r.qs[0];document.querySelectorAll('#test-area .choice')[x.p.choices.indexOf(x.p.ans)].click();C('[data-q=show]');
+   ok([...document.querySelectorAll('#test-area .choice')].every(c=>c.disabled),'show me how locks the choices');let s=0;while(document.querySelector('[data-q=step]')&&s<20){C('[data-q=step]');s++}
+   ok(document.querySelectorAll('#test-area .walk li').length===x.p.steps.length&&!!document.querySelector('#test-area .walk-ans')&&!!document.querySelector('#test-area .choice.right'),'show me how walks all '+x.p.steps.length+' steps and marks the answer');
+   ok(x.shown===1&&x.pick===-1,'a shown question does not count as right, even after picking the right answer');
+   for(let n=0;n<25;n++){if(n){const q=__R().qs[__R().i];document.querySelectorAll('#test-area .choice')[q.p.choices.indexOf(q.p.ans)].click()}C('[data-q=next]')}
+   const last=st().pert.slice(-1)[0];ok(last.r===24,'results count 24 of 25 right ('+last.r+')');ok(/You used Show me how/.test(document.getElementById('test-area').textContent),'results list the shown question as missed');
+   await new Promise(r=>setTimeout(r,1700));closePops();C('[data-q=quit]')}
   // speed round, full minute
   go('speed');C('#sp-go');let sp=0;const tm=setInterval(()=>{const i=document.getElementById('sp-in');if(!i)return;const q=document.getElementById('sp-q').textContent;i.value='1';C('#sp-ok');sp++},500);
   await new Promise(r=>setTimeout(r,62000));clearInterval(tm);

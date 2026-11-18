@@ -207,6 +207,9 @@ select{font:500 1rem var(--body);padding:8px;border-radius:8px;border:1px solid 
 .bigscore{font:700 3rem/1 var(--display)}
 .meter{height:10px;border-radius:5px;background:var(--line);overflow:hidden}
 .meter i{display:block;height:100%;background:var(--accent)}
+.walk{display:flex;flex-direction:column;align-items:flex-start;gap:10px;margin:4px 0 12px}
+.walk-note{margin:0;padding:10px 14px;border-radius:12px;background:color-mix(in srgb,var(--hi) 14%,var(--surface));border:1px solid color-mix(in srgb,var(--hi) 40%,transparent);font-size:.95rem}
+.walk ol.hints{width:100%;margin:0}.choice.right:disabled{opacity:1}.walk-ans{margin:0;width:100%}
 .miss{display:flex;flex-direction:column;gap:8px;border-top:1px solid var(--line);padding-top:14px}
 /* streaks, badges, notes, chart, speed round, formula sheet */
 .streak{display:inline-flex;align-items:center;gap:4px;font:700 .85rem var(--body);color:var(--c2)}
@@ -1310,16 +1313,22 @@ function start(id,mode){const qs=[];
   else{run={id:'pert',mode:'pert',qs,i:0};nextPert()}ask()}
 function ask(){const{qs,i,mode}=run,x=qs[i],P=mode==='pert',N=P?PN:qs.length;
   T.innerHTML=`<div class="pr"><div class="pr-head"><h3>${P?'PERT practice test':TESTS[run.id][0]+' starting check'}</h3><span class="pr-score">Question ${i+1} of ${N}</span></div><div class="meter"><i style="width:${i/N*100}%"></i></div>
-    ${P&&i===0?'<p class="tagline">Like the real PERT: no time limit, no going back, and no answers until the end. Work each one on scratch paper.</p>':''}
+    ${P&&i===0?'<p class="tagline">Like the real PERT: no time limit and no going back. Work each one on scratch paper. Stuck? <b>Show me how</b> walks you through it, but that question counts as missed.</p>':''}
     <div class="pr-q in">${x.p.q}</div><div class="choices">${x.p.choices.map((c,j)=>`<button class="choice" data-j="${j}" aria-pressed="${x.pick===j}">${esc(c)}</button>`).join('')}${P?'':`<button class="choice" data-j="-1" aria-pressed="${x.pick===-1}">I have not learned this yet</button>`}</div>
+    ${P?'<div class="walk" aria-live="polite"><button class="btn ghost" data-q="show">💡 Show me how to solve it</button></div>':''}
     <div class="row" style="justify-content:space-between"><button class="btn ghost" data-q="quit">Quit</button><button class="btn" data-q="next" ${x.pick==null?'disabled':''}>${i===N-1?'Finish and see my score':P?'Confirm answer':'Next question'}</button></div></div>`;pretty(T)}
+/* "Show me how": walks through the steps one at a time. The question then counts as missed and goes in the notebook. */
+function walkThrough(n){const x=run.qs[run.i],S=x.p.steps,w=T.querySelector('.walk');if(!w)return;x.walkN=n=Math.min(n,S.length);
+  w.innerHTML=`<p class="walk-note">Let's work through it together. This one counts as missed, and it goes in your <b>mistake notebook</b> so you can try a fresh one on another day.</p><ol class="hints">${S.slice(0,n).map(s=>`<li>${s}</li>`).join('')}</ol>${n<S.length?`<button class="btn ghost" data-q="step">Next step (${n} of ${S.length})</button>`:`<p class="tip walk-ans"><b>Answer:</b> <span class="m">${esc(x.p.ans)}</span></p>`}`;
+  const ol=w.querySelector('ol');work(ol);pretty(w);const li=ol.children[n-1];if(li)[...li.children].forEach(c=>anim(c,'in'));
+  if(n>=S.length){const c=T.querySelector(`.choice[data-j="${x.p.choices.indexOf(x.p.ans)}"]`);if(c)c.classList.add('right')}}
 function results(){const{qs,id,mode}=run,by={};let right=0;qs.forEach(x=>{const b=by[x.k]=by[x.k]||[0,0];b[1]++;if(good(x)){right++;b[0]++}});
   if(mode==='check'){st.chk[id]=1;addXP(20);const rows=Object.keys(by).map(k=>{const r=by[k][0],s=sk(k);s.lvl=r===0?1:2;if(r===2&&s.n<2)s.n=2;return`<tr><td><a href="#t-${k}" data-k="${k}">Lesson ${NUM[k]}: ${NAME[k]}</a></td><td>${r===2?'Already familiar. Starts at Test level with a head start.':r===1?'Partly there. Starts at Test level.':'Fresh ground. Starts at Warm-up.'}</td></tr>`}).join('');
     const first=Object.keys(by).find(k=>by[k][0]<2)||Object.keys(by)[0];save();
     T.innerHTML=`<div class="pr in"><div class="pr-head"><h3>Your starting points</h3></div><p>Every lesson is now set to a level that fits. Nothing here is a grade. It only decides where each lesson begins.</p><div class="tbl"><table><tr><th>Lesson</th><th>Where you start</th></tr>${rows}</table></div><div class="row l"><a class="btn" href="#t-${first}" data-k="${first}">Begin with Lesson ${NUM[first]}, ${NAME[first]}</a><button class="btn ghost" data-q="quit">Back</button></div></div>`;paint();return}
   const e=est(qs),s=toScore(e.m),lo=toScore(e.m-e.sd),hi=toScore(e.m+e.sd),B=band(s),h=st.pert=st.pert||[],pb=h.length?Math.max(...h.map(x=>x.s)):0;h.push({d:today(),s,r:right,t:Date.now()});markDay();qs.forEach(x=>{if(!good(x))nbAdd(x.k,x.lv,x.gi)});if(h.length>12)h.shift();save();addXP(right*5);if(h.length>1&&s>pb)confetti();
   const rows=Object.keys(by).sort((a,b)=>by[a][0]/by[a][1]-by[b][0]/by[b][1]).map(k=>`<tr><td><a href="#t-${k}" data-k="${k}">Lesson ${NUM[k]}: ${NAME[k]}</a></td><td class="m">${by[k][0]} of ${by[k][1]}</td><td>${by[k][0]===by[k][1]?'Solid':by[k][0]/by[k][1]>=.5?'Review':'Study this first'}</td></tr>`).join('');
-  const miss=qs.filter(x=>!good(x)).map(x=>`<div class="miss"><div class="pr-q">${x.p.q}</div><p><b class="k2">You chose:</b> <span class="m">${esc(x.p.choices[x.pick])}</span> &nbsp; <b class="k3">Correct:</b> <span class="m">${esc(x.p.ans)}</span></p><ol class="hints">${x.p.steps.map(s=>`<li>${s}</li>`).join('')}</ol></div>`).join('');
+  const miss=qs.filter(x=>!good(x)).map(x=>`<div class="miss"><div class="pr-q">${x.p.q}</div><p>${x.shown?'<b class="k2">You used Show me how.</b>':`<b class="k2">You chose:</b> <span class="m">${esc(x.p.choices[x.pick])}</span>`} &nbsp;<b class="k3">Correct:</b> <span class="m">${esc(x.p.ans)}</span></p><ol class="hints">${x.p.steps.map(s=>`<li>${s}</li>`).join('')}</ol></div>`).join('');
   const gap=st.target-s;
   T.innerHTML=`<div class="pr in"><div class="pr-head"><h3>PERT practice test results</h3></div>${dialSVG(s,st.target)}<p class="note" style="margin-top:-4px">estimated PERT math score</p>${h.length>1?chartSVG(h,st.target):''}
     <p class="tagline">Likely somewhere from ${lo} to ${hi} · ${right} of ${PN} right · your goal is ${st.target}</p>
@@ -1334,6 +1343,8 @@ T.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;
   if(b.dataset.pt)return start(null,'pert');if(b.dataset.c&&b.classList.contains('card'))return start(b.dataset.c,'check');
   if(b.dataset.j!==undefined){run.qs[run.i].pick=+b.dataset.j;T.querySelectorAll('.choice').forEach(c=>c.setAttribute('aria-pressed',c===b));T.querySelector('[data-q=next]').disabled=false}
   if(b.dataset.q==='quit')menu();
+  if(b.dataset.q==='show'){const x=run.qs[run.i];x.shown=1;x.pick=-1;T.querySelectorAll('.choice').forEach(c=>{c.disabled=true;c.setAttribute('aria-pressed','false')});const nx=T.querySelector('[data-q=next]');nx.disabled=false;if(nx.textContent==='Confirm answer')nx.textContent='Next question';walkThrough(1)}
+  if(b.dataset.q==='step')walkThrough((run.qs[run.i].walkN||0)+1);
   if(b.dataset.q==='next'){const N=run.mode==='pert'?PN:run.qs.length;if(run.i>=N-1)results();else{if(run.mode==='pert')nextPert();run.i++;ask()}window.scrollTo(0,0)}});
 menu();
 

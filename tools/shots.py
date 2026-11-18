@@ -22,6 +22,7 @@ SHOTS = {
   'practice': 'show("eq",true);const s=document.getElementById("t-eq");for(let i=0;i<9;i++){const b=s.querySelector(".pager [data-pg=\'1\']:not([hidden])");if(b)b.click()}',
   'question': 'show("test",true);document.querySelector("[data-pt]").click();',
   'results': 'show("test",true);document.querySelector("[data-pt]").click();for(let n=0;n<25;n++){const r=__R(),x=r.qs[r.i],ch=[...document.querySelectorAll("#test-area .choice")];let i=x.p.choices.indexOf(x.p.ans);if(x.b>0.9)i=(i+1)%ch.length;ch[i].click();document.querySelector("[data-q=next]").click()}setTimeout(()=>{document.querySelectorAll(".lvlup").forEach(e=>e.remove());window.scrollTo(0,0)},2000);',
+  'walk': 'show("test",true);document.querySelector("[data-pt]").click();document.querySelector("[data-q=show]").click();document.querySelector("[data-q=step]")?.click();document.querySelector("[data-q=step]")?.click();document.querySelector("[data-q=step]")?.click();',
   'profile': 'show("me",true);',
   'notebook': 'show("nb",true);',
   'speed': 'show("speed",true);document.getElementById("sp-go").click();',
@@ -33,7 +34,7 @@ for name, js in SHOTS.items():
     page = work / f'{name}.html'
     page.write_text(s.replace('<head>', '<head>' + pre, 1).replace('</body>', f'<script>setTimeout(()=>{{{clean}{js}}},2400)</script></body>'), encoding='utf-8')
     for scheme, flag in (('dark', 0), ('light', 1)):
-        if scheme == 'light' and name not in ('home', 'results', 'profile', 'practice'):
+        if scheme == 'light' and name not in ('home', 'results', 'profile', 'practice', 'walk'):
             continue
         size = '1280,900' if name == 'home' and scheme == 'light' else ('500,3000' if name == 'profile' else '500,1050')
         subprocess.run([CHROME, '--headless=new', '--disable-gpu', f'--user-data-dir={work/"p"}', '--hide-scrollbars', f'--window-size={size}',
