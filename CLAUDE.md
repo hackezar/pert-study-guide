@@ -22,3 +22,7 @@ the Accuplacer guide that was a claude.ai artifact ("Bailey's Study Guide", http
   `python tools/shots.py OUTDIR` (light/dark screenshots). Headless screenshots freeze requestAnimationFrame, so
   the dial count-up shows its first frame there; smoke.py checks the real value.
 - `tools/convert.py`, `add_features.py`, `flair.py` are one-time patch records; edit `index.html` directly now.
+
+## Obsidian notes (ai2ndbrain vault)
+Jack's notes for this project live in his ai2ndbrain Obsidian vault at `C:\Users\Jack\AI2ndBrain\03 Projects\Apps\04 PERT Study Guide\`. Hub note: `(C) pert-study-guide.md` (listed in `Apps\(C) Apps.md`). Never put Bailey's sync code in the vault either.
+- At the start of a session, read the hub note for current status and next steps; update its Status when something ships.
